@@ -8,6 +8,7 @@ import { TasksContext } from '../context/TasksContext';
 import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
 import FormulaText from '../components/FormulaText';
+import IconButton from '../components/IconButton';
 import NumericKeyboard from '../components/NumericKeyboard';
 import RoundedContainer from '../components/RoundedContainer';
 import SafeStatusBar from '../components/SafeStatusBar';
@@ -43,9 +44,39 @@ const TaskScreen = () => {
     );
   }, []);
 
+  const finish = () => {
+    const stats = buildStats(tasks);
+    setTopicGrades(stats, tasksType === 'EXAM');
+
+    router.replace({
+      pathname: '/answersFinal',
+      params: {
+        scoreValue: calculateMeanGrade(stats),
+        tasksType: tasksType,
+        sectionId: sectionId,
+        courseId: courseId,
+        topicId: topicId,
+      },
+    });
+  };
+
   const getButtonTitle = () => {
     return isLastTask() ? 'Pabaigti' : 'Sekanti užduotis';
   };
+
+  const getPrimaryButton = () => {
+    return (
+      <AppButton
+        color={isLastTask() ? 'secondary' : 'primary'}
+        icon={icons.arrowRight}
+        onPress={handleNext}
+        style={styles.buttonNext}
+        title={getButtonTitle()}
+      />
+    );
+  };
+
+  const getTitle = () => 'Užduotis ' + (taskIndex + 1) + ' iš ' + numTasks;
 
   const goToIndex = (index) => {
     setUserInput(inputPlaceholder);
@@ -61,6 +92,18 @@ const TaskScreen = () => {
         setUserInput(number);
       }
     }
+  };
+
+  const handleClosePress = () => {
+    return Alert.alert('Ar tikrai nori nutraukti sprendimus?', null, [
+      { text: 'Ne' },
+      {
+        text: 'Taip',
+        onPress: () => {
+          finish();
+        },
+      },
+    ]);
   };
 
   const handleNext = async () => {
@@ -97,23 +140,18 @@ const TaskScreen = () => {
   };
 
   const navigateNext = () => {
-    if (isLastTask()) {
-      const stats = buildStats(tasks);
-      setTopicGrades(stats, tasksType === 'EXAM');
+    isLastTask() ? finish() : goToIndex(taskIndex + 1);
+  };
 
-      router.replace({
-        pathname: '/answersFinal',
-        params: {
-          scoreValue: calculateMeanGrade(stats),
-          tasksType: tasksType,
-          sectionId: sectionId,
-          courseId: courseId,
-          topicId: topicId,
-        },
-      });
-    } else {
-      goToIndex(taskIndex + 1);
-    }
+  const saveTasks = () => {
+    const solve = task.solve;
+    const correctAnswer = task.values[solve];
+    task.correctAnswer = correctAnswer;
+    task.isCorrect = correctAnswer === userInput;
+    task.userInput = userInput;
+
+    tasks[taskIndex] = task;
+    setTasks(tasks);
   };
 
   function buildStats(tasks) {
@@ -141,31 +179,6 @@ const TaskScreen = () => {
     return topics;
   }
 
-  const saveTasks = () => {
-    const solve = task.solve;
-    const correctAnswer = task.values[solve];
-    task.correctAnswer = correctAnswer;
-    task.isCorrect = correctAnswer === userInput;
-    task.userInput = userInput;
-
-    tasks[taskIndex] = task;
-    setTasks(tasks);
-  };
-
-  const getPrimaryButton = () => {
-    return (
-      <AppButton
-        color={isLastTask() ? 'secondary' : 'primary'}
-        icon={icons.arrowRight}
-        onPress={handleNext}
-        style={styles.buttonNext}
-        title={getButtonTitle()}
-      />
-    );
-  };
-
-  const getTitle = () => 'Užduotis ' + (taskIndex + 1) + ' iš ' + numTasks;
-
   if (!task) return null;
 
   return (
@@ -173,7 +186,14 @@ const TaskScreen = () => {
       <SafeStatusBar backgroundColor={colors.VIOLET} />
 
       <RoundedContainer isPrimary bl br style={styles.containerTop}>
-        <AppText style={styles.title}>{getTitle()}</AppText>
+        <View style={{ justifyContent: 'center' }}>
+          <AppText style={styles.title}>{getTitle()}</AppText>
+          <IconButton
+            name={icons.close}
+            onPress={handleClosePress}
+            style={{ position: 'absolute', right: 0 }}
+          />
+        </View>
       </RoundedContainer>
 
       <View style={styles.containerDisplayScreen}>
