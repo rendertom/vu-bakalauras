@@ -14,9 +14,12 @@ import SafeStatusBar from '../components/SafeStatusBar';
 
 import colors from '../config/colors';
 import icons from '../config/icons';
+import tasksConfig from '../config/tasksConfig';
 
 const inputPlaceholder = '?';
 const radius = 40;
+
+let numTries = 0;
 
 const TaskScreen = () => {
   const { setTopicGrades, calculateMeanGrade } = useContext(ProgressContext);
@@ -60,12 +63,30 @@ const TaskScreen = () => {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (userInput === inputPlaceholder) {
-      return Alert.alert('Enter number');
+      return Alert.alert('Įvesk atsakymą');
     }
 
-    saveTasks();
+    if (numTries === 0) {
+      saveTasks();
+    }
+
+    if (tasksConfig.SHOW_HELP_WHEN_INCORRECT) {
+      const correct = task.values.C;
+      if (userInput !== correct) {
+        numTries++;
+
+        if (numTries === 1) {
+          return Alert.alert(`Atsakymas yra netaisingas`);
+        }
+
+        setUserInput(correct);
+        return Alert.alert(`Teisingas atsakymas yra ${correct}`);
+      }
+    }
+
+    numTries = 0;
     navigateNext();
   };
 
@@ -119,6 +140,7 @@ const TaskScreen = () => {
 
     return topics;
   }
+
   const saveTasks = () => {
     const solve = task.solve;
     const correctAnswer = task.values[solve];

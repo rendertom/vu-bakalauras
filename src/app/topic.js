@@ -17,12 +17,12 @@ import { TasksContext } from '../context/TasksContext';
 import colors from '../config/colors';
 import icons from '../config/icons';
 import images from '../config/images';
-import taskNumbers from '../config/taskNumbers';
+import tasksConfig from '../config/tasksConfig';
 import text from '../config/text';
 
 import school from '../data/school';
 
-const NUM_TASKS_FOR_SELF_CHECK = taskNumbers.NUM_TASKS_FOR_SELF_CHECK;
+const NUM_TASKS_FOR_SELF_CHECK = tasksConfig.NUM_TASKS_FOR_SELF_CHECK;
 
 const TopicScreen = () => {
   const { courseId, sectionId, topicId } = useLocalSearchParams();

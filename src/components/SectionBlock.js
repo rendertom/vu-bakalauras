@@ -15,11 +15,11 @@ import TopicName from '../components/TopicName.js';
 
 import colors from '../config/colors';
 import icons from '../config/icons';
-import taskNumbers from '../config/taskNumbers.js';
+import tasksConfig from '../config/tasksConfig.js';
 
 import school from '../data/school.js';
 
-const NUM_TASKS_IN_EXAM_PER_TOPIC = taskNumbers.NUM_TASKS_IN_EXAM_PER_TOPIC;
+const NUM_TASKS_IN_EXAM_PER_TOPIC = tasksConfig.NUM_TASKS_IN_EXAM_PER_TOPIC;
 
 const isOdd = (num) => num % 2;
 
