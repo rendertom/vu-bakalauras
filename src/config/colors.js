@@ -1,0 +1,17 @@
+export default {
+  DARK: '#1E1E1E',
+  BLACK: '#000',
+  WHITE: '#FFF',
+
+  GRAY: '#A3A3A3',
+  GRAY_LIGHT: '#F2F2F2',
+
+  CORRECT: '#4CAF50',
+  WRONG: '#F44336',
+
+  BLUE: '#44D5F4',
+  PINK: '#F64CD1',
+  VIOLET: '#B54BF6',
+  VIOLET_DARK: '#993DC5',
+  YELLOW: '#F6E54C',
+};
