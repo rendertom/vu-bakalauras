@@ -1,6 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { useContext, useState } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
+import AlertAsync from 'react-native-alert-async';
 
 import { ProgressContext } from '../context/ProgressContext';
 import { TasksContext } from '../context/TasksContext';
@@ -110,12 +111,11 @@ const TaskScreen = () => {
       if (userInput !== correct) {
         numTries++;
 
-        if (numTries === 1) {
-          return Alert.alert(`Atsakymas yra neteisingas`);
-        }
-
-        setUserInput(correct);
-        return Alert.alert(`Teisingas atsakymas yra ${correct}`);
+        return numTries === 1
+          ? AlertAsync(`Atsakymas yra neteisingas`)
+          : AlertAsync(`Teisingas atsakymas yra ${correct}`).then(() =>
+              setUserInput(correct)
+            );
       }
     }
 
