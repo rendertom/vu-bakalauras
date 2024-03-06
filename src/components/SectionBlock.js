@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
-import { router, useLocalSearchParams } from 'expo-router';
+import { router } from 'expo-router';
 
 import { ProgressContext } from '../context/ProgressContext.js';
 import { TasksContext } from '../context/TasksContext.js';
@@ -23,8 +23,7 @@ const NUM_TASKS_IN_EXAM_PER_TOPIC = taskNumbers.NUM_TASKS_IN_EXAM_PER_TOPIC;
 
 const isOdd = (num) => num % 2;
 
-const SectionBlock = ({ section, index, isLast }) => {
-  const { courseId } = useLocalSearchParams();
+const SectionBlock = ({ courseId, section, index, isLast }) => {
   const { tasks, setTasks } = useContext(TasksContext);
   const {
     canTakeExam,
@@ -95,14 +94,14 @@ const SectionBlock = ({ section, index, isLast }) => {
         color={color}
         showCheckmark={userHasMasteredSection(sectionId)}
         subtitle={
-          tookInitialExam(sectionId) && !userHasMasteredSection(sectionId)
+          shouldBeOpen
             ? canTakeExam(sectionId)
               ? 'Pabandyk išlaikyti egzaminą'
               : 'Pasimokink'
             : null
         }
         someComponent={
-          !tookInitialExam(sectionId) || userHasMasteredSection(sectionId) ? (
+          !shouldBeOpen ? (
             <StarRatingDisplay
               starSize={16}
               rating={getExamGrade(sectionId) * 5}
@@ -135,7 +134,7 @@ const SectionBlock = ({ section, index, isLast }) => {
             ? {
                 marginLeft: 0,
                 marginRight: 0,
-                paddingBottom: 100,
+                paddingBottom: 50,
               }
             : {},
         ]}>

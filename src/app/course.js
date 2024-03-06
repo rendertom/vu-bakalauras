@@ -15,10 +15,12 @@ import icons from '../config/icons';
 import text from '../config/text.js';
 
 import school from '../data/school.js';
+import { View } from 'react-native';
 
 const CourseScreen = () => {
   const { courseId } = useLocalSearchParams();
   const course = school.findCourseById(courseId);
+  const numSections = course.getSections().length;
 
   const { clearProgress } = useContext(ProgressContext);
 
@@ -58,10 +60,18 @@ const CourseScreen = () => {
         <SectionBlock
           key={index}
           index={index}
-          isLast={index === course.getSections().length - 1}
+          isLast={index === numSections - 1}
           section={section}
+          courseId={courseId}
         />
       ))}
+
+      <View // fills remaining part of the screen
+        style={{
+          height: '100%',
+          backgroundColor: numSections % 2 ? colors.WHITE : colors.VIOLET,
+        }}
+      />
     </ScrollView>
   );
 };
