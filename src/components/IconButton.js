@@ -1,29 +1,32 @@
-import React from "react";
-import { StyleSheet, TouchableHighlight } from "react-native";
+import React from 'react';
+import { StyleSheet, TouchableHighlight } from 'react-native';
 
-import AppIcon from "./AppIcon";
+import AppIcon from './AppIcon';
 
-import colors from "../config/colors";
+import colors from '../config/colors';
 
-const IconButton = ({ name, onPress, style }) => {
+const IconButton = ({ name, onPress, style, iconColor }) => {
   return (
     <TouchableHighlight
       onPress={onPress}
       style={[styles.button, style]}
-      underlayColor={colors.YELLOW}
-    >
-      <AppIcon color={colors.WHITE} name={name} size="small" />
+      underlayColor={colors.YELLOW}>
+      <AppIcon
+        color={iconColor ? iconColor : colors.WHITE}
+        name={name}
+        size="small"
+      />
     </TouchableHighlight>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    alignItems: "center",
+    alignItems: 'center',
     backgroundColor: colors.VIOLET_DARK,
     borderRadius: 50,
     height: 35,
-    justifyContent: "center",
+    justifyContent: 'center',
     width: 35,
   },
 });

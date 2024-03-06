@@ -14,6 +14,7 @@ const SectionTitle = ({
   subtitle,
   showCheckmark,
   someComponent,
+  rightIcon,
 }) => {
   return (
     <View style={[{ flexDirection: 'row' }, styles.sectionTitle]}>
@@ -25,13 +26,15 @@ const SectionTitle = ({
         />
       ) : null}
 
-      <View>
+      <View style={{ flex: 1 }}>
         <AppText style={[text.sectionTitle, { color }]}>{title}</AppText>
         {subtitle ? (
           <AppText style={[text.subtitle, { color }]}>{subtitle}</AppText>
         ) : null}
         {someComponent}
       </View>
+
+      {rightIcon}
     </View>
   );
 };
