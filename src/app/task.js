@@ -78,7 +78,7 @@ const TaskScreen = () => {
         numTries++;
 
         if (numTries === 1) {
-          return Alert.alert(`Atsakymas yra netaisingas`);
+          return Alert.alert(`Atsakymas yra neteisingas`);
         }
 
         setUserInput(correct);

@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
+import LottieView from 'lottie-react-native';
 
 import { ProgressContext } from '../context/ProgressContext';
 import { TasksContext } from '../context/TasksContext';
@@ -14,11 +15,12 @@ import IconButton from '../components/IconButton.js';
 import RoundedContainer from '../components/RoundedContainer.js';
 import RoundedContainerAnother from '../components/RoundedContainerAnother.js';
 import SafeStatusBar from '../components/SafeStatusBar.js';
+import TitleLottie from '../components/TitleLottie.js';
 
 import colors from '../config/colors.js';
 import icons from '../config/icons';
+import images from '../config/images.js';
 import tasksConfig from '../config/tasksConfig.js';
-import text from '../config/text.js';
 
 import school from '../data/school.js';
 
@@ -35,10 +37,17 @@ const AnswersFinalScreen = () => {
   const isSelfCheck = tasksType === 'SELF_CHECK';
   const isExam = tasksType === 'EXAM';
 
+  const confettiRef = useRef(null);
+  useEffect(() => {
+    if (gotGoodGrade() && confettiRef.current) {
+      confettiRef.current.play(0);
+    }
+  }, []);
+
   const getExamFailingText = () => {
     const names = getTopicNamesFailing();
     const count = names.length;
-    return `Dar reikia pasimokinti. Grįžk atgal ir pasikartok${
+    return `Dar reikia pasimokyti. Grįžk atgal ir pasikartok${
       count === 1 ? '' : ' ' + count
     } ${pluralize(count, 'temą', 'temas')} ${names.join(', ')}.`;
   };
@@ -48,34 +57,24 @@ const AnswersFinalScreen = () => {
 
   const getText = () => {
     if (isInitialTest) {
-      return godGoodGrade()
+      return gotGoodGrade()
         ? `Puikiai padirbėta! Tu gerai moki skyrių "${getSectionName()}". Pamėgink išlaikyti egzaminą!`
         : getExamFailingText();
     }
 
     if (isSelfCheck) {
-      return godGoodGrade()
+      return gotGoodGrade()
         ? canTakeExam(sectionId)
           ? `Puikiai padirbėta! Tu gerai moki temą "${getTopicName()}". Pamėgink išlaikyti egzaminą!`
           : `Puikiai padirbėta! Tu gerai moki temą "${getTopicName()}". Pasimokink sekančią temą!`
-        : `Dar reikia pasimokinti. Grįžk atgal ir pasikartok temą "${getTopicName()}".`;
+        : `Dar reikia pasimokyti. Grįžk atgal ir pasikartok temą "${getTopicName()}".`;
     }
 
     if (isExam) {
-      return godGoodGrade()
+      return gotGoodGrade()
         ? `Puikiai padirbėta! Tu gerai išmokai skyrių "${getSectionName()}"`
         : getExamFailingText();
     }
-  };
-
-  const getTitle = () => {
-    return scoreValue < 0.45
-      ? 'Prastai 😭'
-      : scoreValue >= 0.45 && scoreValue < 0.75
-      ? 'Neblogai 🥲'
-      : scoreValue >= 0.75 && scoreValue < 0.95
-      ? 'Gerai 😌'
-      : 'Puikiai 😁';
   };
 
   const getTopicName = () => {
@@ -100,10 +99,10 @@ const AnswersFinalScreen = () => {
     });
   };
 
-  const godGoodGrade = () => scoreValue >= MIN_GRADE_ALLOWED_FOR_EXAM;
+  const gotGoodGrade = () => scoreValue >= MIN_GRADE_ALLOWED_FOR_EXAM;
 
   const handleClose = () => {
-    if (godGoodGrade() && (isSelfCheck || scoreValue)) {
+    if (gotGoodGrade() && (isSelfCheck || scoreValue)) {
       router.navigate({
         pathname: '/course',
         params: {
@@ -139,17 +138,24 @@ const AnswersFinalScreen = () => {
 
   return (
     <View style={styles.container}>
+      {gotGoodGrade() ? (
+        <LottieView
+          ref={confettiRef}
+          source={images.lottie.confetti}
+          loop={false}
+          style={styles.lottie}
+          resizeMode="cover"
+          pointerEvents="none"
+        />
+      ) : null}
+
       <SafeStatusBar />
 
       <RoundedContainerAnother
         leftComponent={
           <IconButton name={icons.arrowLeft} onPress={router.back} />
         }
-        mainComponent={
-          <AppText style={[{ color: colors.WHITE }, text.title]}>
-            {getTitle()}
-          </AppText>
-        }
+        mainComponent={<TitleLottie scoreValue={scoreValue} />}
         subComponent={<StarRatingDisplay rating={scoreValue * 5} />}
       />
 
@@ -168,11 +174,11 @@ const AnswersFinalScreen = () => {
 
       <View style={{ flex: 1, paddingTop: 20 }}>
         <AppButton
-          icon={godGoodGrade() ? icons.close : null}
-          iconLeft={godGoodGrade() ? null : icons.arrowLeft}
+          icon={gotGoodGrade() ? icons.close : null}
+          iconLeft={gotGoodGrade() ? null : icons.arrowLeft}
           onPress={handleClose}
           style={styles.buttonClose}
-          title={godGoodGrade() ? 'Uždaryti' : 'Grįžk atgal'}
+          title={gotGoodGrade() ? 'Uždaryti' : 'Grįžk atgal'}
         />
 
         <RoundedContainer tl tr style={styles.containerBottom}>
@@ -211,6 +217,12 @@ const styles = StyleSheet.create({
   infoBlock: {
     paddingBottom: 20,
     paddingHorizontal: 10,
+  },
+  lottie: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    zIndex: 1,
   },
   text: {
     color: colors.GRAY_LIGHT,

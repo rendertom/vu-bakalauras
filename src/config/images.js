@@ -1,5 +1,13 @@
 export default {
   icon: require('../../assets/icon.png'),
+  lottie: {
+    confetti: require('../../assets/lottie/confetti.json'),
+    average: require('../../assets/lottie/emoji-sad.json'),
+    good: require('../../assets/lottie/emoji-smile.json'),
+    great: require('../../assets/lottie/emoji-glasses.json'),
+    poor: require('../../assets/lottie/emoji-cry.json'),
+  },
+  //
   '000': [require('../../assets/images/000.jpg')],
   111: [require('../../assets/images/111.png')],
   112: [require('../../assets/images/112.png')],
