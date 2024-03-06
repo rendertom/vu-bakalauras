@@ -17,6 +17,7 @@ import SafeStatusBar from '../components/SafeStatusBar.js';
 
 import colors from '../config/colors.js';
 import icons from '../config/icons';
+import tasksConfig from '../config/tasksConfig.js';
 import text from '../config/text.js';
 
 import school from '../data/school.js';
@@ -119,7 +120,7 @@ const AnswersFinalScreen = () => {
       school
         .findCourseById(courseId)
         .findSectionById(sectionId)
-        .buildExam(1)
+        .buildExam(tasksConfig.NUM_TASKS_IN_EXAM_PER_TOPIC)
         .flat()
     );
 
@@ -201,6 +202,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.VIOLET,
   },
   containerBottom: {
+    height: '100%',
     paddingVertical: 0,
     paddingHorizontal: 0,
     marginRight: 0,
