@@ -27,22 +27,12 @@ const TaskScreen = () => {
   const { tasksType, topicId, sectionId, courseId } = useLocalSearchParams();
 
   const { tasks, setTasks } = useContext(TasksContext);
-  const [taskIndex, setTaskIndex] = useState();
-  const [userInput, setUserInput] = useState();
+  const [taskIndex, setTaskIndex] = useState(0);
+  const [userInput, setUserInput] = useState(inputPlaceholder);
 
   const task = tasks[taskIndex];
   const numTasks = tasks.length;
   const isLastTask = () => taskIndex === numTasks - 1;
-
-  useState(() => {
-    const taskIndex = 0;
-    setTaskIndex(taskIndex);
-    setUserInput(
-      typeof tasks[taskIndex].userInput !== 'undefined'
-        ? tasks[taskIndex].userInput
-        : inputPlaceholder
-    );
-  }, []);
 
   const finish = () => {
     const stats = buildStats(tasks);
