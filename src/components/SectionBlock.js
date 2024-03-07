@@ -7,6 +7,7 @@ import { ProgressContext } from '../context/ProgressContext.js';
 import { TasksContext } from '../context/TasksContext.js';
 
 import AppButton from '../components/AppButton.js';
+import AppText from './AppText.js';
 import IconButton from '../components/IconButton.js';
 import ListItemSeparator from '../components/ListItemSeparator.js';
 import RoundedContainer from '../components/RoundedContainer.js';
@@ -16,6 +17,7 @@ import TopicName from '../components/TopicName.js';
 import colors from '../config/colors';
 import icons from '../config/icons';
 import tasksConfig from '../config/tasksConfig.js';
+import text from '../config/text.js';
 
 import school from '../data/school.js';
 
@@ -102,10 +104,15 @@ const SectionBlock = ({ courseId, section, index, isLast }) => {
         }
         someComponent={
           !shouldBeOpen ? (
-            <StarRatingDisplay
-              starSize={16}
-              rating={getExamGrade(sectionId) * 5}
-            />
+            <View style={{ flexDirection: 'row' }}>
+              <AppText style={[text.subtitle, { color: color }]}>
+                {Math.max(0, Math.floor(getExamGrade(sectionId) * 10))}/10
+              </AppText>
+              <StarRatingDisplay
+                starSize={16}
+                rating={getExamGrade(sectionId) * 5}
+              />
+            </View>
           ) : null
         }
         rightIcon={

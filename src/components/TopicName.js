@@ -24,7 +24,16 @@ const TopicName = ({ onPress, scoreValue, title, onLight = true }) => {
             {title}
           </AppText>
 
-          <StarRatingDisplay starSize={16} rating={scoreValue} />
+          <View style={{ flexDirection: 'row' }}>
+            <AppText
+              style={[
+                text.subtitle,
+                { color: onLight ? colors.GRAY : colors.GRAY_LIGHT },
+              ]}>
+              {Math.floor(scoreValue * 2)}/10
+            </AppText>
+            <StarRatingDisplay starSize={16} rating={scoreValue} />
+          </View>
         </View>
 
         {onPress ? (
