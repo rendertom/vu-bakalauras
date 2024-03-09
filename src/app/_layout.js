@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 
 import { ProgressProvider } from '../context/ProgressContext';
 import { TasksProvider } from '../context/TasksContext';
+import { UserProvider } from '../context/UserContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -36,26 +37,34 @@ const RootLayout = () => {
   // console.log('OUT');
 
   return (
-    <ProgressProvider>
-      <TasksProvider>
-        <Stack>
-          {/* <Stack.Screen name='(tabs)' options={{
+    <UserProvider>
+      <ProgressProvider>
+        <TasksProvider>
+          <Stack>
+            {/* <Stack.Screen name='(tabs)' options={{
         headerShown: false,
       }}/>  */}
-          {/* <Stack.Screen name='index' options={{
+            {/* <Stack.Screen name='index' options={{
         headerTitle: 'Home page'
       }}/>
       <Stack.Screen name='users/[id]' options={{
         headerTitle: 'User page'
       }}/> */}
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="course" options={{ headerShown: false }} />
-          <Stack.Screen name="topic" options={{ headerShown: false }} />
-          <Stack.Screen name="task" options={{ headerShown: false }} />
-          <Stack.Screen name="answersFinal" options={{ headerShown: false }} />
-        </Stack>
-      </TasksProvider>
-    </ProgressProvider>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="course" options={{ headerShown: false }} />
+            <Stack.Screen name="topic" options={{ headerShown: false }} />
+            <Stack.Screen name="task" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="answersFinal"
+              options={{ headerShown: false }}
+            />
+
+            <Stack.Screen name="signIn" options={{ headerShown: true }} />
+            <Stack.Screen name="signUp" options={{ headerShown: true }} />
+          </Stack>
+        </TasksProvider>
+      </ProgressProvider>
+    </UserProvider>
   );
 };
 

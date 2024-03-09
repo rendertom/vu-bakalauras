@@ -13,6 +13,24 @@ const SchoolScreen = () => {
     <View style={styles.container}>
       <Image source={images.icon} style={styles.image} />
 
+      <AppButton
+        title="Sign In"
+        onPress={() => {
+          router.push({
+            pathname: '/signIn',
+          });
+        }}
+      />
+
+      <AppButton
+        title="Sign Up"
+        onPress={() => {
+          router.push({
+            pathname: '/signUp',
+          });
+        }}
+      />
+
       {school.courses.map((course, index) => (
         <AppButton
           style={styles.button}
