@@ -6,14 +6,10 @@ import { ProgressProvider } from '../../context/ProgressContext';
 import { TasksProvider } from '../../context/TasksContext';
 
 const AppLayout = () => {
-  const { authUser, isAuthLoaded } = useContext(AuthContext);
+  const { session } = useContext(AuthContext);
 
-  if (!isAuthLoaded) {
-    return;
-  }
-
-  if (!authUser) {
-    return <Redirect href="../(auth)/signIn" />;
+  if (!session) {
+    return <Redirect href={'/'} />;
   }
 
   return (

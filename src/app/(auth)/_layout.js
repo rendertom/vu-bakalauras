@@ -1,6 +1,14 @@
-import { Stack } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 const AuthLayout = () => {
+  const { session } = useContext(AuthContext);
+
+  if (session) {
+    return <Redirect href={'/'} />;
+  }
+
   return (
     <Stack>
       <Stack.Screen name="signIn" options={{ headerShown: true }} />

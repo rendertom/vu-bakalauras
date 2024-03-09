@@ -1,27 +1,34 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 import firebaseClient from '../api/firebaseClient';
-import { AUTH } from '../api/FirebaseConfig';
 
 export const AuthContext = createContext({
-  authUser: undefined,
-  isAuthLoaded: false,
+  session: null,
+  isSessionLoading: true,
+  user: null,
 });
 
 export const AuthProvider = ({ children }) => {
-  const [authUser, setAuthUser] = useState(null);
-  const [isAuthLoaded, setIsAuthLoaded] = useState(false);
+  const [session, setSession] = useState(null);
+  const [isSessionLoading, setIsSessionLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = firebaseClient.onAuthStateChanged((authUser) => {
-      setAuthUser(authUser);
-      setIsAuthLoaded(true);
+    const unsubscribe = firebaseClient.onAuthStateChanged(async (session) => {
+      setSession(session);
+
+      if (session) {
+        const snap = await firebaseClient.getUser(session.uid);
+        setUser(snap.data());
+      }
+
+      setIsSessionLoading(false);
     });
     return unsubscribe;
   }, []);
 
   return (
-    <AuthContext.Provider value={{ authUser, isAuthLoaded }}>
+    <AuthContext.Provider value={{ session, isSessionLoading, user }}>
       {children}
     </AuthContext.Provider>
   );

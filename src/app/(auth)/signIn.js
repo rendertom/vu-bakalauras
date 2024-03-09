@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
 import * as Yup from 'yup';
@@ -10,8 +10,6 @@ import AppForm from '../../components/forms/AppFrom';
 import AppFormField from '../../components/forms/AppFormField';
 import AppText from '../../components/AppText';
 import SubmitButton from '../../components/forms/SubmitButton';
-
-import { UserContext } from '../../context/UserContext';
 
 import firebaseClient from '../../api/firebaseClient';
 import text from '../../config/text';
@@ -28,8 +26,6 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignIn = () => {
-  const { user, setUser } = useContext(UserContext);
-
   const [loginFailed, setLoginFailed] = useState(false);
   const [isLoading, setIsLoading] = useState();
 
@@ -39,21 +35,6 @@ const SignIn = () => {
 
     await firebaseClient
       .signIn(email, password)
-      .then(async (userCredential) => {
-        return firebaseClient
-          .getUser(userCredential.user.uid)
-          .then((docSnapshot) => {
-            if (docSnapshot) {
-              return docSnapshot.data();
-            }
-          });
-      })
-      .then((user) => {
-        setUser(user);
-        router.replace({
-          pathname: '../(app)/home',
-        });
-      })
       .catch((error) => {
         setLoginFailed(true);
         console.log('handleSingIn() error:', error);

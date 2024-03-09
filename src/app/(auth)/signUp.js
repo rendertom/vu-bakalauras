@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useContext, useState } from 'react';
 import { router } from 'expo-router';
 import * as Yup from 'yup';
 
@@ -10,8 +10,6 @@ import AppForm from '../../components/forms/AppFrom';
 import AppFormField from '../../components/forms/AppFormField';
 import AppText from '../../components/AppText';
 import SubmitButton from '../../components/forms/SubmitButton';
-
-import { UserContext } from '../../context/UserContext';
 
 import firebaseClient from '../../api/firebaseClient';
 import text from '../../config/text';
@@ -24,8 +22,6 @@ const validationSchema = Yup.object().shape({
 });
 
 const signUp = () => {
-  const { user, setUser } = useContext(UserContext);
-
   const [isLoading, setIsLoading] = useState();
   const [error, setError] = useState();
 
@@ -38,12 +34,6 @@ const signUp = () => {
     setIsLoading(true);
     firebaseClient
       .createUser(email, firstName, lastName, password)
-      .then((user) => {
-        setUser(user);
-        router.replace({
-          pathname: '../(app)/home',
-        });
-      })
       .catch((error) => {
         console.log(error);
         setError(error.toString());

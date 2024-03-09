@@ -3,7 +3,6 @@ import { Slot, SplashScreen } from 'expo-router';
 import { useFonts } from 'expo-font';
 
 import { AuthProvider } from '../context/AuthContext';
-import { UserProvider } from '../context/UserContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -35,9 +34,7 @@ const RootLayout = () => {
 
   return (
     <AuthProvider>
-      <UserProvider>
-        <Slot />
-      </UserProvider>
+      <Slot />
     </AuthProvider>
   );
 };
