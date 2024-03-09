@@ -1,40 +1,15 @@
-import { useContext, useEffect } from 'react';
-import { SplashScreen, Stack } from 'expo-router';
+import { useEffect } from 'react';
+import { Slot, SplashScreen } from 'expo-router';
 import { useFonts } from 'expo-font';
 
-import { ProgressProvider } from '../context/ProgressContext';
-import { TasksProvider } from '../context/TasksContext';
-import { UserContext, UserProvider } from '../context/UserContext';
-
-import firebaseClient from '../api/firebaseClient';
+import { AuthProvider } from '../context/AuthContext';
+import { UserProvider } from '../context/UserContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
-  const { user, setUser } = useContext(UserContext);
-
-  useEffect(() => {
-    const unsubscribe = firebaseClient.onAuthStateChanged((user) => {
-      if (user) {
-        console.log('connected');
-
-        console.log('NICEEEE', user.uid);
-
-        firebaseClient.getUser(user.uid).then((docSnapshot) => {
-          if (docSnapshot) {
-            console.log('got from db', docSnapshot.data());
-            // return docSnapshot.data();
-          }
-        });
-      } else {
-        console.log('no user');
-      }
-    });
-    return unsubscribe;
-  }, []);
-
-  const [loaded, error] = useFonts({
+  const [fontsLoaded, error] = useFonts({
     'Roboto-Black': require('../../assets/fonts/Roboto/Roboto-Black.ttf'),
     'Roboto-Bold': require('../../assets/fonts/Roboto/Roboto-Bold.ttf'),
     'Roboto-Light': require('../../assets/fonts/Roboto/Roboto-Light.ttf'),
@@ -49,37 +24,21 @@ const RootLayout = () => {
   }, [error]);
 
   useEffect(() => {
-    if (loaded) {
+    if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [fontsLoaded]);
 
-  if (!loaded) {
+  if (!fontsLoaded) {
     return null;
   }
 
-  // console.log('OUT');
-
   return (
-    <UserProvider>
-      <ProgressProvider>
-        <TasksProvider>
-          <Stack>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen name="course" options={{ headerShown: false }} />
-            <Stack.Screen name="topic" options={{ headerShown: false }} />
-            <Stack.Screen name="task" options={{ headerShown: false }} />
-            <Stack.Screen
-              name="answersFinal"
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen name="signIn" options={{ headerShown: true }} />
-            <Stack.Screen name="signUp" options={{ headerShown: true }} />
-          </Stack>
-        </TasksProvider>
-      </ProgressProvider>
-    </UserProvider>
+    <AuthProvider>
+      <UserProvider>
+        <Slot />
+      </UserProvider>
+    </AuthProvider>
   );
 };
 

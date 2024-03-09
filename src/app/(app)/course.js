@@ -2,19 +2,19 @@ import { useContext } from 'react';
 import { Alert, ScrollView, StyleSheet } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 
-import { ProgressContext } from '../context/ProgressContext.js';
+import { ProgressContext } from '../../context/ProgressContext.js';
 
-import AppText from '../components/AppText.js';
-import IconButton from '../components/IconButton.js';
-import RoundedContainerAnother from '../components/RoundedContainerAnother.js';
-import SafeStatusBar from '../components/SafeStatusBar.js';
-import SectionBlock from '../components/SectionBlock.js';
+import AppText from '../../components/AppText.js';
+import IconButton from '../../components/IconButton.js';
+import RoundedContainerAnother from '../../components/RoundedContainerAnother.js';
+import SafeStatusBar from '../../components/SafeStatusBar.js';
+import SectionBlock from '../../components/SectionBlock.js';
 
-import colors from '../config/colors';
-import icons from '../config/icons';
-import text from '../config/text.js';
+import colors from '../../config/colors.js';
+import icons from '../../config/icons.js';
+import text from '../../config/text.js';
 
-import school from '../data/school.js';
+import school from '../../data/school.js';
 import { View } from 'react-native';
 
 const CourseScreen = () => {

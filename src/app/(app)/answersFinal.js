@@ -4,25 +4,25 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
 import LottieView from 'lottie-react-native';
 
-import { ProgressContext } from '../context/ProgressContext';
-import { TasksContext } from '../context/TasksContext';
+import { ProgressContext } from '../../context/ProgressContext.js';
+import { TasksContext } from '../../context/TasksContext.js';
 
-import AnswerItem from '../components/AnswerItem';
-import AppButton from '../components/AppButton';
-import AppFlatList from '../components/AppFlatList';
-import AppText from '../components/AppText.js';
-import IconButton from '../components/IconButton.js';
-import RoundedContainer from '../components/RoundedContainer.js';
-import RoundedContainerAnother from '../components/RoundedContainerAnother.js';
-import SafeStatusBar from '../components/SafeStatusBar.js';
-import TitleLottie from '../components/TitleLottie.js';
+import AnswerItem from '../../components/AnswerItem.js';
+import AppButton from '../../components/AppButton.js';
+import AppFlatList from '../../components/AppFlatList.js';
+import AppText from '../../components/AppText.js';
+import IconButton from '../../components/IconButton.js';
+import RoundedContainer from '../../components/RoundedContainer.js';
+import RoundedContainerAnother from '../../components/RoundedContainerAnother.js';
+import SafeStatusBar from '../../components/SafeStatusBar.js';
+import TitleLottie from '../../components/TitleLottie.js';
 
-import colors from '../config/colors.js';
-import icons from '../config/icons';
-import images from '../config/images.js';
-import tasksConfig from '../config/tasksConfig.js';
+import colors from '../../config/colors.js';
+import icons from '../../config/icons.js';
+import images from '../../config/images.js';
+import tasksConfig from '../../config/tasksConfig.js';
 
-import school from '../data/school.js';
+import school from '../../data/school.js';
 
 const MIN_GRADE_ALLOWED_FOR_EXAM = 0.8;
 

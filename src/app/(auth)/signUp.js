@@ -3,18 +3,18 @@ import { useContext, useState } from 'react';
 import { router } from 'expo-router';
 import * as Yup from 'yup';
 
-import AppActivityIndicator from '../components/AppActivityIndicator';
-import AppButton from '../components/AppButton';
-import AppErrorMessage from '../components/forms/AppErrorMessage';
-import AppForm from '../components/forms/AppFrom';
-import AppFormField from '../components/forms/AppFormField';
-import AppText from '../components/AppText';
-import SubmitButton from '../components/forms/SubmitButton';
+import AppActivityIndicator from '../../components/AppActivityIndicator';
+import AppButton from '../../components/AppButton';
+import AppErrorMessage from '../../components/forms/AppErrorMessage';
+import AppForm from '../../components/forms/AppFrom';
+import AppFormField from '../../components/forms/AppFormField';
+import AppText from '../../components/AppText';
+import SubmitButton from '../../components/forms/SubmitButton';
 
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 
-import firebaseClient from '../api/firebaseClient';
-import text from '../config/text';
+import firebaseClient from '../../api/firebaseClient';
+import text from '../../config/text';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
@@ -41,7 +41,7 @@ const signUp = () => {
       .then((user) => {
         setUser(user);
         router.replace({
-          pathname: '/',
+          pathname: '../(app)/home',
         });
       })
       .catch((error) => {

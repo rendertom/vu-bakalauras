@@ -1,15 +1,37 @@
+import { useContext, useEffect } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { router } from 'expo-router';
 
-import AppButton from '../components/AppButton.js';
+import AppButton from '../../components/AppButton.js';
+import AppText from '../../components/AppText.js';
 
-import colors from '../config/colors.js';
-import images from '../config/images.js';
+import { AuthContext } from '../../context/AuthContext.js';
+import { UserContext } from '../../context/UserContext.js';
 
-import school from '../data/school.js';
-import firebaseClient from '../api/firebaseClient.js';
+import firebaseClient from '../../api/firebaseClient.js';
+
+import colors from '../../config/colors.js';
+import images from '../../config/images.js';
+
+import school from '../../data/school.js';
 
 const SchoolScreen = () => {
+  const { authUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    const initUser = async () => {
+      await firebaseClient.getUser(authUser.uid).then((snap) => {
+        setUser(snap.data());
+      });
+    };
+    !user && initUser();
+  }, []);
+
+  if (!user) {
+    return <AppText>LODING USER</AppText>;
+  }
+
   return (
     <View style={styles.container}>
       <Image source={images.icon} style={styles.image} />
@@ -18,23 +40,6 @@ const SchoolScreen = () => {
         title="logout"
         onPress={() => {
           firebaseClient.signOut();
-        }}
-      />
-      <AppButton
-        title="Sign In"
-        onPress={() => {
-          router.push({
-            pathname: '/signIn',
-          });
-        }}
-      />
-
-      <AppButton
-        title="Sign Up"
-        onPress={() => {
-          router.push({
-            pathname: '/signUp',
-          });
         }}
       />
 
