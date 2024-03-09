@@ -8,7 +8,7 @@ function AppActivityIndicator({ visible = false }) {
 
   return (
     <View style={styles.overlay}>
-      <AI size="large" color={colors.white} />
+      <AI size="large" color={colors.WHITE} />
     </View>
   );
 }

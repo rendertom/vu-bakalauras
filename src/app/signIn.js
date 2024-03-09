@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
 import * as Yup from 'yup';
 
@@ -11,6 +11,9 @@ import AppFormField from '../components/forms/AppFormField';
 import AppText from '../components/AppText';
 import SubmitButton from '../components/forms/SubmitButton';
 
+import { UserContext } from '../context/UserContext';
+
+import firebaseClient from '../api/firebaseClient';
 import text from '../config/text';
 
 const validationSchema = Yup.object().shape({
@@ -25,15 +28,44 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignIn = () => {
-  // const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const [loginFailed, setLoginFailed] = useState(false);
   const [isLoading, setIsLoading] = useState();
 
   const handleSingIn = async ({ email, password }) => {
-    console.log(email, password);
-    console.log('TODO');
-    // setIsLoading(true);
+    setIsLoading(true);
+    setLoginFailed(false);
+
+    await firebaseClient
+      .signIn(email, password)
+      // .then(async (userCredential) => {
+      //   // return firebaseClient
+      //   //   .getUser(userCredential.user.uid)
+      //   //   .then((docSnapshot) => {
+      //   //     if (docSnapshot) {
+      //   //       return docSnapshot.data();
+      //   //     }
+      //   //   });
+      // })
+      // .then((user) => {
+      //   setUser(user);
+      //   router.replace({
+      //     pathname: '/',
+      //   });
+      //   // navigation.replace("dashboard");
+      //   // navigation.replace("app", {
+      //   // screen: "usernavigator",
+      //   // });
+      // })
+      .catch((error) => {
+        setLoginFailed(true);
+        console.log('handleSingIn() error:', error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
     // await firebaseClient
     //   .signIn(email, password)
     //   .then(async (userCredential) => {

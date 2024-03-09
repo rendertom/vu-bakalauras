@@ -11,6 +11,9 @@ import AppFormField from '../components/forms/AppFormField';
 import AppText from '../components/AppText';
 import SubmitButton from '../components/forms/SubmitButton';
 
+import { UserContext } from '../context/UserContext';
+
+import firebaseClient from '../api/firebaseClient';
 import text from '../config/text';
 
 const validationSchema = Yup.object().shape({
@@ -21,7 +24,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const signUp = () => {
-  // const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const [isLoading, setIsLoading] = useState();
   const [error, setError] = useState();
@@ -32,21 +35,22 @@ const signUp = () => {
     });
 
   const handleSignUp = ({ email, firstName, lastName, password }) => {
-    console.log('TODO');
-    // setIsLoading(true);
-    // firebaseClient
-    //   .createUser(email, firstName, lastName, password)
-    //   .then((user) => {
-    //     setUser(user);
-    //     navigation.replace("dashboard");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     setError(error.toString());
-    //   })
-    //   .finally(() => {
-    //     setIsLoading(false);
-    //   });
+    setIsLoading(true);
+    firebaseClient
+      .createUser(email, firstName, lastName, password)
+      .then((user) => {
+        setUser(user);
+        router.replace({
+          pathname: '/',
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error.toString());
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (

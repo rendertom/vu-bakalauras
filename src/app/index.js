@@ -7,12 +7,19 @@ import colors from '../config/colors.js';
 import images from '../config/images.js';
 
 import school from '../data/school.js';
+import firebaseClient from '../api/firebaseClient.js';
 
 const SchoolScreen = () => {
   return (
     <View style={styles.container}>
       <Image source={images.icon} style={styles.image} />
 
+      <AppButton
+        title="logout"
+        onPress={() => {
+          firebaseClient.signOut();
+        }}
+      />
       <AppButton
         title="Sign In"
         onPress={() => {

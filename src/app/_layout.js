@@ -1,15 +1,39 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 
 import { ProgressProvider } from '../context/ProgressContext';
 import { TasksProvider } from '../context/TasksContext';
-import { UserProvider } from '../context/UserContext';
+import { UserContext, UserProvider } from '../context/UserContext';
+
+import firebaseClient from '../api/firebaseClient';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
+  const { user, setUser } = useContext(UserContext);
+
+  useEffect(() => {
+    const unsubscribe = firebaseClient.onAuthStateChanged((user) => {
+      if (user) {
+        console.log('connected');
+
+        console.log('NICEEEE', user.uid);
+
+        firebaseClient.getUser(user.uid).then((docSnapshot) => {
+          if (docSnapshot) {
+            console.log('got from db', docSnapshot.data());
+            // return docSnapshot.data();
+          }
+        });
+      } else {
+        console.log('no user');
+      }
+    });
+    return unsubscribe;
+  }, []);
+
   const [loaded, error] = useFonts({
     'Roboto-Black': require('../../assets/fonts/Roboto/Roboto-Black.ttf'),
     'Roboto-Bold': require('../../assets/fonts/Roboto/Roboto-Bold.ttf'),
@@ -41,15 +65,6 @@ const RootLayout = () => {
       <ProgressProvider>
         <TasksProvider>
           <Stack>
-            {/* <Stack.Screen name='(tabs)' options={{
-        headerShown: false,
-      }}/>  */}
-            {/* <Stack.Screen name='index' options={{
-        headerTitle: 'Home page'
-      }}/>
-      <Stack.Screen name='users/[id]' options={{
-        headerTitle: 'User page'
-      }}/> */}
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="course" options={{ headerShown: false }} />
             <Stack.Screen name="topic" options={{ headerShown: false }} />
