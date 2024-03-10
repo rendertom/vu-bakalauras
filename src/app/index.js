@@ -19,15 +19,7 @@ const Index = () => {
     return <Redirect href="/(teacher)/students" />;
   }
 
-  return (
-    <View style={{ paddingTop: 100 }}>
-      <Text>HELLLLLLLLOOOOOO</Text>
-      <Text>{isTeacher ? 'Teacher' : 'Student'}</Text>
-      <Link href="/(app)/home" asChild>
-        <Text>GOGOGO</Text>
-      </Link>
-    </View>
-  );
+  return <Redirect href={'/(app)/home'} />;
 };
 
 export default Index;
