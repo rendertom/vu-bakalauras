@@ -6,6 +6,7 @@ export const AuthContext = createContext({
   session: null,
   isSessionLoading: true,
   user: null,
+  isTeacher: false,
 });
 
 export const AuthProvider = ({ children }) => {
@@ -28,7 +29,13 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ session, isSessionLoading, user }}>
+    <AuthContext.Provider
+      value={{
+        session,
+        isSessionLoading,
+        user,
+        isTeacher: user?.type === 'TEACHER',
+      }}>
       {children}
     </AuthContext.Provider>
   );

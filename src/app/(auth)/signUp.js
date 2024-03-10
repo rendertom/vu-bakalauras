@@ -12,6 +12,8 @@ import AppText from '../../components/AppText';
 import SubmitButton from '../../components/forms/SubmitButton';
 
 import firebaseClient from '../../api/firebaseClient';
+
+import colors from '../../config/colors';
 import text from '../../config/text';
 
 const validationSchema = Yup.object().shape({
@@ -24,6 +26,7 @@ const validationSchema = Yup.object().shape({
 const signUp = () => {
   const [isLoading, setIsLoading] = useState();
   const [error, setError] = useState();
+  const [isTeacher, setIsTeacher] = useState(false);
 
   const handleSingIn = () =>
     router.replace({
@@ -32,8 +35,10 @@ const signUp = () => {
 
   const handleSignUp = ({ email, firstName, lastName, password }) => {
     setIsLoading(true);
+
+    const type = isTeacher ? 'TEACHER' : 'STUDENT';
     firebaseClient
-      .createUser(email, firstName, lastName, password)
+      .createUser(email, firstName, lastName, password, type)
       .catch((error) => {
         console.log(error);
         setError(error.toString());
@@ -68,6 +73,24 @@ const signUp = () => {
             secureTextEntry
             textContentType="password"
           />
+          <View style={{ flexDirection: 'row', gap: 10 }}>
+            <AppText
+              style={{ color: !isTeacher ? colors.PINK : colors.GRAY }}
+              onPress={() => {
+                setIsTeacher(false);
+              }}>
+              Mokinys
+            </AppText>
+            <AppText
+              style={{
+                color: isTeacher ? colors.PINK : colors.GRAY,
+              }}
+              onPress={() => {
+                setIsTeacher(true);
+              }}>
+              Mokytojas
+            </AppText>
+          </View>
         </View>
         <SubmitButton title="Susikurk paskyrą" style={styles.button} />
       </AppForm>

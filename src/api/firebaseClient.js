@@ -3,23 +3,23 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  where,
+} from 'firebase/firestore';
 
 import { AUTH, DB } from './FirebaseConfig';
 
+const COLLECTION_EXAMS = 'exams';
 const COLLECTION_USERS = 'users';
 
 export default {
-  signOut: async () => {
-    await AUTH.signOut();
-  },
-
-  onAuthStateChanged: (callback) => {
-    onAuthStateChanged(AUTH, callback);
-    // firebase.auth().onAuthStateChanged((user) => callback(user));
-  },
-
-  async createUser(email, firstName, lastName, password) {
+  async createUser(email, firstName, lastName, password, type) {
     const userCredential = await createUserWithEmailAndPassword(
       AUTH,
       email,
@@ -37,7 +37,7 @@ export default {
         firstName,
         lastName,
         uid,
-        // likes: [],
+        type,
       };
 
       await setDoc(docRef, user);
@@ -46,11 +46,42 @@ export default {
     }
   },
 
+  async getExamsByUser(uid) {
+    const q = query(
+      collection(DB, COLLECTION_EXAMS),
+      where('userId', '==', uid)
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    return querySnapshot.docs.map((doc) => doc.data());
+  },
+
+  async getStudents() {
+    const q = query(
+      collection(DB, COLLECTION_USERS),
+      where('type', '==', 'STUDENT')
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    return querySnapshot.docs.map((doc) => doc.data());
+  },
+
   async getUser(uid) {
     const docRef = doc(DB, `${COLLECTION_USERS}/${uid}`);
     const docSnap = await getDoc(docRef);
 
     return docSnap;
+  },
+
+  onAuthStateChanged: (callback) => onAuthStateChanged(AUTH, callback),
+
+  async saveTasks(tasks) {
+    const examsRef = collection(DB, COLLECTION_EXAMS);
+    const docRef = doc(examsRef);
+
+    await setDoc(docRef, tasks);
   },
 
   async signIn(email, password) {
@@ -62,4 +93,6 @@ export default {
 
     return userCredential;
   },
+
+  signOut: async () => await AUTH.signOut(),
 };

@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 import AlertAsync from 'react-native-alert-async';
 
+import { AuthContext } from '../../context/AuthContext';
 import { ProgressContext } from '../../context/ProgressContext';
 import { TasksContext } from '../../context/TasksContext';
 
@@ -18,12 +19,16 @@ import colors from '../../config/colors';
 import icons from '../../config/icons';
 import tasksConfig from '../../config/tasksConfig';
 
+import firebaseClient from '../../api/firebaseClient';
+import school from '../../data/school';
+
 const inputPlaceholder = '?';
 const radius = 40;
 
 let numTries = 0;
 
 const TaskScreen = () => {
+  const { user } = useContext(AuthContext);
   const { setTopicGrades, calculateMeanGrade } = useContext(ProgressContext);
   const { tasksType, topicId, sectionId, courseId } = useLocalSearchParams();
 
@@ -38,6 +43,25 @@ const TaskScreen = () => {
   const finish = () => {
     const stats = buildStats(tasks);
     setTopicGrades(stats, tasksType === 'EXAM');
+
+    firebaseClient.saveTasks({
+      userId: user.uid,
+      date: Date.now(),
+      firstName: user.firstName,
+      className: school.findCourseById(courseId).getName(),
+      sectionName: school
+        .findCourseById(courseId)
+        .findSectionById(sectionId)
+        .getName(),
+      tasks: tasks.map((task) => ({
+        isCorrect: task.isCorrect,
+        userInput: task.userInput,
+        correctAnswer: task.correctAnswer,
+        sign: task.sign,
+        solve: task.solve,
+        values: task.values,
+      })),
+    });
 
     router.replace({
       pathname: '/answersFinal',

@@ -5,7 +5,7 @@ import { Link, Redirect } from 'expo-router';
 import { AuthContext } from '../context/AuthContext';
 
 const Index = () => {
-  const { session, isSessionLoading, user } = useContext(AuthContext);
+  const { session, isSessionLoading, isTeacher } = useContext(AuthContext);
 
   if (isSessionLoading) {
     return;
@@ -15,16 +15,14 @@ const Index = () => {
     return <Redirect href="../(auth)/signIn" />;
   }
 
-  console.log(user);
-
-  // TODO
-  // if (user.isAdmin) {
-  //   return <Redirect href="../(admin)/" />;
-  // }
+  if (isTeacher) {
+    return <Redirect href="/(teacher)/students" />;
+  }
 
   return (
     <View style={{ paddingTop: 100 }}>
       <Text>HELLLLLLLLOOOOOO</Text>
+      <Text>{isTeacher ? 'Teacher' : 'Student'}</Text>
       <Link href="/(app)/home" asChild>
         <Text>GOGOGO</Text>
       </Link>
