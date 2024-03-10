@@ -22,6 +22,15 @@ const SchoolScreen = () => {
         }}
       />
 
+      <AppButton
+        title="old"
+        onPress={() => {
+          router.push({
+            pathname: 'setupScreen',
+          });
+        }}
+      />
+
       {school.courses.map((course, index) => (
         <AppButton
           style={styles.button}
