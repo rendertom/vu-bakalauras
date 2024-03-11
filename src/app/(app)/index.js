@@ -6,13 +6,14 @@ import StudentScreen from './screens/StudentScreen.js';
 import TeacherScreen from './screens/TeacherScreen.js';
 
 const SchoolScreen = () => {
-  const { session, isTeacher, isSessionLoading } = useContext(AuthContext);
+  const { session, isTeacher, isSessionLoading, user } =
+    useContext(AuthContext);
 
   if (isSessionLoading) {
     return null;
   }
 
-  if (session) {
+  if (session && user) {
     return isTeacher ? <TeacherScreen /> : <StudentScreen />;
   }
 
