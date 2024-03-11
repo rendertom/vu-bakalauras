@@ -15,12 +15,11 @@ const AppLayout = () => {
   return (
     <ProgressProvider>
       <TasksProvider>
-        <Stack>
-          <Stack.Screen name="home" options={{ headerShown: false }} />
-          <Stack.Screen name="course" options={{ headerShown: false }} />
-          <Stack.Screen name="topic" options={{ headerShown: false }} />
-          <Stack.Screen name="task" options={{ headerShown: false }} />
-          <Stack.Screen name="answersFinal" options={{ headerShown: false }} />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="answersFinal" />
+          <Stack.Screen name="course" />
+          <Stack.Screen name="task" />
+          <Stack.Screen name="topic" />
         </Stack>
       </TasksProvider>
     </ProgressProvider>

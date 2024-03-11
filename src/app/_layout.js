@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Slot, SplashScreen } from 'expo-router';
+import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 
 import { AuthProvider } from '../context/AuthContext';
@@ -34,9 +34,19 @@ const RootLayout = () => {
 
   return (
     <AuthProvider>
-      <Slot />
+      <RootLayoutNav />
     </AuthProvider>
   );
 };
 
+function RootLayoutNav() {
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
+      <Stack.Screen name="(app)" />
+      <Stack.Screen name="(auth)" options={{ presentation: 'modal' }} />
+      <Stack.Screen name="(old)" />
+    </Stack>
+  );
+}
 export default RootLayout;

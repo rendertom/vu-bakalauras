@@ -1,5 +1,6 @@
-import { Redirect, Stack } from 'expo-router';
 import { useContext } from 'react';
+import { Redirect, Stack } from 'expo-router';
+
 import { AuthContext } from '../../context/AuthContext';
 
 const AuthLayout = () => {
@@ -10,9 +11,9 @@ const AuthLayout = () => {
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="signIn" options={{ headerShown: true }} />
-      <Stack.Screen name="signUp" options={{ headerShown: true }} />
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="signIn" />
+      <Stack.Screen name="signUp" />
     </Stack>
   );
 };

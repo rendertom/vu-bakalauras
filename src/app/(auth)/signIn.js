@@ -35,6 +35,9 @@ const SignIn = () => {
 
     await firebaseClient
       .signIn(email, password)
+      .then((something) => {
+        router.back();
+      })
       .catch((error) => {
         setLoginFailed(true);
         console.log('handleSingIn() error:', error);

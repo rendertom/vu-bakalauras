@@ -1,25 +1,22 @@
 import { useContext } from 'react';
-import { Text, View } from 'react-native';
-import { Link, Redirect } from 'expo-router';
 
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext.js';
+import NoUserScreen from './screens/NoUserScreen.js';
+import StudentScreen from './screens/StudentScreen.js';
+import TeacherScreen from './screens/TeacherScreen.js';
 
-const Index = () => {
-  const { session, isSessionLoading, isTeacher } = useContext(AuthContext);
+const SchoolScreen = () => {
+  const { session, isTeacher, isSessionLoading } = useContext(AuthContext);
 
   if (isSessionLoading) {
-    return;
+    return null;
   }
 
-  if (!session) {
-    return <Redirect href="../(auth)/signIn" />;
+  if (session) {
+    return isTeacher ? <TeacherScreen /> : <StudentScreen />;
   }
 
-  if (isTeacher) {
-    return <Redirect href="/(teacher)/students" />;
-  }
-
-  return <Redirect href={'/(app)/home'} />;
+  return <NoUserScreen />;
 };
 
-export default Index;
+export default SchoolScreen;
