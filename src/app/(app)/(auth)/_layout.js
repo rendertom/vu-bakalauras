@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Redirect, Stack } from 'expo-router';
 
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../../context/AuthContext';
 
 const AuthLayout = () => {
   const { session } = useContext(AuthContext);

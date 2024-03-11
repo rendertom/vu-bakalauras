@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { AuthContext } from '../context/AuthContext.js';
+import { AuthContext } from '../../context/AuthContext.js';
 import NoUserScreen from './screens/NoUserScreen.js';
 import StudentScreen from './screens/StudentScreen.js';
 import TeacherScreen from './screens/TeacherScreen.js';

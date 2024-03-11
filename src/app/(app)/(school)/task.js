@@ -3,24 +3,24 @@ import { useContext, useState } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 import AlertAsync from 'react-native-alert-async';
 
-import { AuthContext } from '../../context/AuthContext';
-import { ProgressContext } from '../../context/ProgressContext';
-import { TasksContext } from '../../context/TasksContext';
+import { AuthContext } from '../../../context/AuthContext';
+import { ProgressContext } from '../../../context/ProgressContext';
+import { TasksContext } from '../../../context/TasksContext';
 
-import AppButton from '../../components/AppButton';
-import AppText from '../../components/AppText';
-import FormulaText from '../../components/FormulaText';
-import IconButton from '../../components/IconButton';
-import NumericKeyboard from '../../components/NumericKeyboard';
-import RoundedContainer from '../../components/RoundedContainer';
-import SafeStatusBar from '../../components/SafeStatusBar';
+import AppButton from '../../../components/AppButton';
+import AppText from '../../../components/AppText';
+import FormulaText from '../../../components/FormulaText';
+import IconButton from '../../../components/IconButton';
+import NumericKeyboard from '../../../components/NumericKeyboard';
+import RoundedContainer from '../../../components/RoundedContainer';
+import SafeStatusBar from '../../../components/SafeStatusBar';
 
-import colors from '../../config/colors';
-import icons from '../../config/icons';
-import tasksConfig from '../../config/tasksConfig';
+import colors from '../../../config/colors';
+import icons from '../../../config/icons';
+import tasksConfig from '../../../config/tasksConfig';
 
-import firebaseClient from '../../api/firebaseClient';
-import school from '../../data/school';
+import firebaseClient from '../../../api/firebaseClient';
+import school from '../../../data/school';
 
 const inputPlaceholder = '?';
 const radius = 40;

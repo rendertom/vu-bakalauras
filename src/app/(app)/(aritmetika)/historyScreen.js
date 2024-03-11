@@ -2,18 +2,18 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 
-import ActionButton from '../../components/ActionButton';
-import AppFlatList from '../../components/AppFlatList';
-import AppText from '../../components/AppText';
-import HistoryItem from '../../components/HistoryItem';
-import IconButton from '../../components/IconButton';
-import ScreenForList from '../../components/ScreenForList';
+import ActionButton from '../../../components/ActionButton';
+import AppFlatList from '../../../components/AppFlatList';
+import AppText from '../../../components/AppText';
+import HistoryItem from '../../../components/HistoryItem';
+import IconButton from '../../../components/IconButton';
+import ScreenForList from '../../../components/ScreenForList';
 
-import { LocalizationContext } from '../../context/LocalizationContext.js';
-import { getData, removeItem } from '../../services/historyHandler.js';
+import { LocalizationContext } from '../../../context/LocalizationContext.js';
+import { getData, removeItem } from '../../../services/historyHandler.js';
 
-import icons from '../../config/icons';
-import colors from '../../config/colors';
+import icons from '../../../config/icons';
+import colors from '../../../config/colors';
 
 const showPreloader = () => (
   <View style={styles.container}>

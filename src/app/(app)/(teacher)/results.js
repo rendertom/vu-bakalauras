@@ -2,18 +2,18 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 
-import AnswerItem from '../../components/AnswerItem';
-import AppFlatList from '../../components/AppFlatList';
-import AppText from '../../components/AppText';
-import IconButton from '../../components/IconButton';
-import RoundedContainerAnother from '../../components/RoundedContainerAnother';
-import SafeStatusBar from '../../components/SafeStatusBar';
+import AnswerItem from '../../../components/AnswerItem';
+import AppFlatList from '../../../components/AppFlatList';
+import AppText from '../../../components/AppText';
+import IconButton from '../../../components/IconButton';
+import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
+import SafeStatusBar from '../../../components/SafeStatusBar';
 
-import colors from '../../config/colors';
-import icons from '../../config/icons';
-import text from '../../config/text';
+import colors from '../../../config/colors';
+import icons from '../../../config/icons';
+import text from '../../../config/text';
 
-const Results = () => {
+const ResultsScreen = () => {
   const { tasksString } = useLocalSearchParams();
   const [tasks, setTasks] = useState([]);
 
@@ -46,4 +46,4 @@ const Results = () => {
   );
 };
 
-export default Results;
+export default ResultsScreen;

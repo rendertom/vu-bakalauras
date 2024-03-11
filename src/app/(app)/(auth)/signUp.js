@@ -3,22 +3,22 @@ import { StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 import * as Yup from 'yup';
 
-import AppActivityIndicator from '../../components/AppActivityIndicator';
-import AppButton from '../../components/AppButton';
-import AppErrorMessage from '../../components/forms/AppErrorMessage';
-import AppForm from '../../components/forms/AppFrom';
-import AppFormField from '../../components/forms/AppFormField';
-import AppText from '../../components/AppText';
-import IconButton from '../../components/IconButton';
-import RoundedContainer from '../../components/RoundedContainer';
-import RoundedContainerAnother from '../../components/RoundedContainerAnother';
-import SubmitButton from '../../components/forms/SubmitButton';
+import AppActivityIndicator from '../../../components/AppActivityIndicator';
+import AppButton from '../../../components/AppButton';
+import AppErrorMessage from '../../../components/forms/AppErrorMessage';
+import AppForm from '../../../components/forms/AppFrom';
+import AppFormField from '../../../components/forms/AppFormField';
+import AppText from '../../../components/AppText';
+import IconButton from '../../../components/IconButton';
+import RoundedContainer from '../../../components/RoundedContainer';
+import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
+import SubmitButton from '../../../components/forms/SubmitButton';
 
-import colors from '../../config/colors';
-import icons from '../../config/icons';
-import text from '../../config/text';
+import colors from '../../../config/colors';
+import icons from '../../../config/icons';
+import text from '../../../config/text';
 
-import firebaseClient from '../../api/firebaseClient';
+import firebaseClient from '../../../api/firebaseClient';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
@@ -27,7 +27,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(6).label('Password'),
 });
 
-const signUp = () => {
+const SignUp = () => {
   const [isLoading, setIsLoading] = useState();
   const [error, setError] = useState();
   const [isTeacher, setIsTeacher] = useState(false);
@@ -129,7 +129,7 @@ const signUp = () => {
   );
 };
 
-export default signUp;
+export default SignUp;
 
 const styles = StyleSheet.create({
   block: {

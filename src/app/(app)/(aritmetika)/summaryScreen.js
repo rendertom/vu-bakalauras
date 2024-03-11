@@ -2,25 +2,25 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 
-import ActionButton from '../../components/ActionButton';
-import AppButton from '../../components/AppButton';
-import RoundedContainer from '../../components/RoundedContainer';
-import SafeStatusBar from '../../components/SafeStatusBar';
-import Score from '../../components/Score';
-import ScoreBox from '../../components/ScoreBox';
-import SectionTitle from '../../components/SectionTitle';
+import ActionButton from '../../../components/ActionButton';
+import AppButton from '../../../components/AppButton';
+import RoundedContainer from '../../../components/RoundedContainer';
+import SafeStatusBar from '../../../components/SafeStatusBar';
+import Score from '../../../components/Score';
+import ScoreBox from '../../../components/ScoreBox';
+import SectionTitle from '../../../components/SectionTitle';
 
-import { LocalizationContext } from '../../context/LocalizationContext';
-import { TasksContext } from '../../context/TasksContext';
-import { TimeContext } from '../../context/TimeContext';
+import { LocalizationContext } from '../../../context/LocalizationContext';
+import { TasksContext } from '../../../context/TasksContext';
+import { TimeContext } from '../../../context/TimeContext';
 
-import colors from '../../config/colors';
-import icons from '../../config/icons';
+import colors from '../../../config/colors';
+import icons from '../../../config/icons';
 
-import { storeData } from '../../services/historyHandler.js';
+import { storeData } from '../../../services/historyHandler.js';
 
-import taskParser from '../../utils/taskParser';
-import timer from '../../utils/timer';
+import taskParser from '../../../utils/taskParser';
+import timer from '../../../utils/timer';
 
 const radius = 40;
 

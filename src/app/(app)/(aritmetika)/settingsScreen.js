@@ -2,23 +2,23 @@ import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 
-import ActionButton from '../../components/ActionButton';
-import AppButton from '../../components/AppButton';
-import AppText from '../../components/AppText';
-import RoundedContainer from '../../components/RoundedContainer';
-import RoundedContainerTop from '../../components/RoundedContainerTop';
-import SectionTitle from '../../components/SectionTitle';
-import SafeStatusBar from '../../components/SafeStatusBar';
+import ActionButton from '../../../components/ActionButton';
+import AppButton from '../../../components/AppButton';
+import AppText from '../../../components/AppText';
+import RoundedContainer from '../../../components/RoundedContainer';
+import RoundedContainerTop from '../../../components/RoundedContainerTop';
+import SectionTitle from '../../../components/SectionTitle';
+import SafeStatusBar from '../../../components/SafeStatusBar';
 
-import { LocalizationContext } from '../../context/LocalizationContext';
+import { LocalizationContext } from '../../../context/LocalizationContext';
 
-import icons from '../../config/icons';
-import colors from '../../config/colors';
-import text from '../../config/text';
+import icons from '../../../config/icons';
+import colors from '../../../config/colors';
+import text from '../../../config/text';
 
-import getAppStoreLink from '../../services/getAppStoreLink';
-import getLanguageButtons from '../../services/getLanguageButtons';
-import openURL from '../../services/openURL';
+import getAppStoreLink from '../../../services/getAppStoreLink';
+import getLanguageButtons from '../../../services/getLanguageButtons';
+import openURL from '../../../services/openURL';
 
 const radius = 40;
 

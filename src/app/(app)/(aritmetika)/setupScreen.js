@@ -2,24 +2,24 @@ import React, { useContext, useState } from 'react';
 import { Alert, ScrollView, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 
-import ActionButton from '../../components/ActionButton';
-import AppButton from '../../components/AppButton';
-import IconButton from '../../components/IconButton';
-import RoundedContainer from '../../components/RoundedContainer';
-import RoundedContainerTop from '../../components/RoundedContainerTop';
-import SafeStatusBar from '../../components/SafeStatusBar';
-import SectionTitle from '../../components/SectionTitle';
-import ToggleButton from '../../components/ToggleButton';
+import ActionButton from '../../../components/ActionButton';
+import AppButton from '../../../components/AppButton';
+import IconButton from '../../../components/IconButton';
+import RoundedContainer from '../../../components/RoundedContainer';
+import RoundedContainerTop from '../../../components/RoundedContainerTop';
+import SafeStatusBar from '../../../components/SafeStatusBar';
+import SectionTitle from '../../../components/SectionTitle';
+import ToggleButton from '../../../components/ToggleButton';
 
-import colors from '../../config/colors';
-import defaultSetup from '../../config/defaultSetup';
-import icons from '../../config/icons';
+import colors from '../../../config/colors';
+import defaultSetup from '../../../config/defaultSetup';
+import icons from '../../../config/icons';
 
-import { LocalizationContext } from '../../context/LocalizationContext';
-import { TasksContext } from '../../context/TasksContext';
-import { TimeContext } from '../../context/TimeContext';
+import { LocalizationContext } from '../../../context/LocalizationContext';
+import { TasksContext } from '../../../context/TasksContext';
+import { TimeContext } from '../../../context/TimeContext';
 
-import taskBuilder from '../../utils/taskBuilder';
+import taskBuilder from '../../../utils/taskBuilder';
 
 const SetupScreen = () => {
   const { localizer } = useContext(LocalizationContext);

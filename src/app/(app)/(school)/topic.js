@@ -3,24 +3,24 @@ import { FlatList, ScrollView, StyleSheet } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
 
-import AppButton from '../../components/AppButton';
-import AppText from '../../components/AppText';
-import IconButton from '../../components/IconButton';
-import ImageClicker from '../../components/ImageClicker';
-import RoundedContainer from '../../components/RoundedContainer';
-import RoundedContainerAnother from '../../components/RoundedContainerAnother';
-import SafeStatusBar from '../../components/SafeStatusBar';
+import AppButton from '../../../components/AppButton';
+import AppText from '../../../components/AppText';
+import IconButton from '../../../components/IconButton';
+import ImageClicker from '../../../components/ImageClicker';
+import RoundedContainer from '../../../components/RoundedContainer';
+import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
+import SafeStatusBar from '../../../components/SafeStatusBar';
 
-import { ProgressContext } from '../../context/ProgressContext';
-import { TasksContext } from '../../context/TasksContext';
+import { ProgressContext } from '../../../context/ProgressContext';
+import { TasksContext } from '../../../context/TasksContext';
 
-import colors from '../../config/colors';
-import icons from '../../config/icons';
-import images from '../../config/images';
-import tasksConfig from '../../config/tasksConfig';
-import text from '../../config/text';
+import colors from '../../../config/colors';
+import icons from '../../../config/icons';
+import images from '../../../config/images';
+import tasksConfig from '../../../config/tasksConfig';
+import text from '../../../config/text';
 
-import school from '../../data/school';
+import school from '../../../data/school';
 
 const NUM_TASKS_FOR_SELF_CHECK = tasksConfig.NUM_TASKS_FOR_SELF_CHECK;
 

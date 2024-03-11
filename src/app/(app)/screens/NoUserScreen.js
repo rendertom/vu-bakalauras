@@ -1,14 +1,14 @@
 import { router } from 'expo-router';
 import { Image, ScrollView, StyleSheet } from 'react-native';
 
-import AppButton from '../../components/AppButton';
-import RoundedContainer from '../../components/RoundedContainer';
-import RoundedContainerAnother from '../../components/RoundedContainerAnother';
-import SafeStatusBar from '../../components/SafeStatusBar';
-import SectionTitle from '../../components/SectionTitle';
+import AppButton from '../../../components/AppButton';
+import RoundedContainer from '../../../components/RoundedContainer';
+import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
+import SafeStatusBar from '../../../components/SafeStatusBar';
+import SectionTitle from '../../../components/SectionTitle';
 
-import colors from '../../config/colors';
-import images from '../../config/images';
+import colors from '../../../config/colors';
+import images from '../../../config/images';
 
 const NoUserScreen = () => {
   return (

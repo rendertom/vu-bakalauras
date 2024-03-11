@@ -1,10 +1,10 @@
 import { Stack } from 'expo-router';
 
-import { LocalizationProvider } from '../../context/LocalizationContext';
-import { TasksProvider } from '../../context/TasksContext';
-import { TimeProvider } from '../../context/TimeContext';
+import { LocalizationProvider } from '../../../context/LocalizationContext';
+import { TasksProvider } from '../../../context/TasksContext';
+import { TimeProvider } from '../../../context/TimeContext';
 
-const OldLayout = () => {
+const AritmetikaLayout = () => {
   return (
     <LocalizationProvider>
       <TimeProvider>
@@ -33,4 +33,4 @@ const OldLayout = () => {
   );
 };
 
-export default OldLayout;
+export default AritmetikaLayout;

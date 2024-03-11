@@ -2,19 +2,19 @@ import React, { useContext, useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 
-import AppButton from '../../components/AppButton';
-import AppText from '../../components/AppText';
-import FormulaText from '../../components/FormulaText';
-import IconButton from '../../components/IconButton';
-import NumericKeyboard from '../../components/NumericKeyboard';
-import RoundedContainer from '../../components/RoundedContainer';
-import SafeStatusBar from '../../components/SafeStatusBar';
+import AppButton from '../../../components/AppButton';
+import AppText from '../../../components/AppText';
+import FormulaText from '../../../components/FormulaText';
+import IconButton from '../../../components/IconButton';
+import NumericKeyboard from '../../../components/NumericKeyboard';
+import RoundedContainer from '../../../components/RoundedContainer';
+import SafeStatusBar from '../../../components/SafeStatusBar';
 
-import { LocalizationContext } from '../../context/LocalizationContext';
-import { TasksContext } from '../../context/TasksContext';
+import { LocalizationContext } from '../../../context/LocalizationContext';
+import { TasksContext } from '../../../context/TasksContext';
 
-import colors from '../../config/colors';
-import icons from '../../config/icons';
+import colors from '../../../config/colors';
+import icons from '../../../config/icons';
 
 const inputPlaceholder = '?';
 const radius = 40;

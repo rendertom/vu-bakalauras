@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 
-import AppButton from '../../components/AppButton';
-import AppFlatList from '../../components/AppFlatList';
-import RoundedContainer from '../../components/RoundedContainer';
-import RoundedContainerAnother from '../../components/RoundedContainerAnother';
-import SafeStatusBar from '../../components/SafeStatusBar';
-import TeacherListItem from '../../components/TeacherListItem';
+import AppButton from '../../../components/AppButton';
+import AppFlatList from '../../../components/AppFlatList';
+import RoundedContainer from '../../../components/RoundedContainer';
+import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
+import SafeStatusBar from '../../../components/SafeStatusBar';
+import TeacherListItem from '../../../components/TeacherListItem';
 
-import colors from '../../config/colors';
-import images from '../../config/images';
+import colors from '../../../config/colors';
+import images from '../../../config/images';
 
-import firebaseClient from '../../api/firebaseClient';
+import firebaseClient from '../../../api/firebaseClient';
 import { router } from 'expo-router';
 
 const TeacherScreen = () => {

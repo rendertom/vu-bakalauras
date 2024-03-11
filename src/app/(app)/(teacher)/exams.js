@@ -2,20 +2,20 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 
-import AppFlatList from '../../components/AppFlatList';
-import AppText from '../../components/AppText';
-import IconButton from '../../components/IconButton';
-import RoundedContainerAnother from '../../components/RoundedContainerAnother';
-import SafeStatusBar from '../../components/SafeStatusBar';
-import TeacherListItem from '../../components/TeacherListItem';
+import AppFlatList from '../../../components/AppFlatList';
+import AppText from '../../../components/AppText';
+import IconButton from '../../../components/IconButton';
+import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
+import SafeStatusBar from '../../../components/SafeStatusBar';
+import TeacherListItem from '../../../components/TeacherListItem';
 
-import colors from '../../config/colors';
-import icons from '../../config/icons';
-import text from '../../config/text';
+import colors from '../../../config/colors';
+import icons from '../../../config/icons';
+import text from '../../../config/text';
 
-import firebaseClient from '../../api/firebaseClient';
+import firebaseClient from '../../../api/firebaseClient';
 
-const Exams = () => {
+const ExamsScreen = () => {
   const user = useLocalSearchParams();
   const [exams, setExams] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -74,4 +74,4 @@ const Exams = () => {
   );
 };
 
-export default Exams;
+export default ExamsScreen;

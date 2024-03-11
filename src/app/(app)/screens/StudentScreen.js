@@ -2,21 +2,21 @@ import { useContext } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../../context/AuthContext';
 
-import AppButton from '../../components/AppButton';
-import AppText from '../../components/AppText';
-import RoundedContainer from '../../components/RoundedContainer';
-import RoundedContainerAnother from '../../components/RoundedContainerAnother';
-import SafeStatusBar from '../../components/SafeStatusBar';
-import SectionTitle from '../../components/SectionTitle';
+import AppButton from '../../../components/AppButton';
+import AppText from '../../../components/AppText';
+import RoundedContainer from '../../../components/RoundedContainer';
+import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
+import SafeStatusBar from '../../../components/SafeStatusBar';
+import SectionTitle from '../../../components/SectionTitle';
 
-import firebaseClient from '../../api/firebaseClient';
+import firebaseClient from '../../../api/firebaseClient';
 
-import colors from '../../config/colors';
-import text from '../../config/text';
+import colors from '../../../config/colors';
+import text from '../../../config/text';
 
-import school from '../../data/school';
+import school from '../../../data/school';
 
 const StudentScreen = () => {
   const { user } = useContext(AuthContext);
