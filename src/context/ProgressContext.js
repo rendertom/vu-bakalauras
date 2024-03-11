@@ -102,7 +102,9 @@ export const ProgressProvider = ({ children }) => {
       for (let j = 0; j < course.sections.length; j++) {
         const section = course.sections[j];
         if (section.id === sectionId) {
-          return section.grade >= MIN_GRADE_ALLOWED_FOR_EXAM;
+          return section.topics.every(
+            (topic) => topic.grade >= MIN_GRADE_ALLOWED_FOR_EXAM
+          );
         }
       }
     }
