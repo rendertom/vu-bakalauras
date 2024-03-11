@@ -16,11 +16,11 @@ function AppActivityIndicator({ visible = false }) {
 const styles = StyleSheet.create({
   overlay: {
     alignItems: 'center',
-    backgroundColor: colors.GRAY,
+    backgroundColor: colors.VIOLET,
     flex: 1,
     height: '100%',
     justifyContent: 'center',
-    opacity: 0.9,
+    opacity: 0.8,
     position: 'absolute',
     width: '100%',
     zIndex: 1,

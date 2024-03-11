@@ -9,12 +9,16 @@ import AppErrorMessage from '../../components/forms/AppErrorMessage';
 import AppForm from '../../components/forms/AppFrom';
 import AppFormField from '../../components/forms/AppFormField';
 import AppText from '../../components/AppText';
+import IconButton from '../../components/IconButton';
+import RoundedContainer from '../../components/RoundedContainer';
+import RoundedContainerAnother from '../../components/RoundedContainerAnother';
 import SubmitButton from '../../components/forms/SubmitButton';
 
-import firebaseClient from '../../api/firebaseClient';
-
 import colors from '../../config/colors';
+import icons from '../../config/icons';
 import text from '../../config/text';
+
+import firebaseClient from '../../api/firebaseClient';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label('Email'),
@@ -50,61 +54,77 @@ const signUp = () => {
 
   return (
     <View style={styles.container}>
-      <AppText style={text.joke}>Sing Up</AppText>
+      <RoundedContainerAnother
+        mainComponent={
+          <AppText style={[text.title, { color: colors.WHITE }]}>
+            Susikurk paskyrą
+          </AppText>
+        }
+        leftComponent={<IconButton name={icons.close} onPress={router.back} />}
+      />
+
       <AppActivityIndicator visible={isLoading} />
 
-      <AppForm
-        initialValues={{ email: '', firstName: '', lastName: '', password: '' }}
-        onSubmit={handleSignUp}
-        validationSchema={validationSchema}>
-        <AppErrorMessage error={error} visible={error} />
-        <View style={styles.containerInputFields}>
-          <AppFormField name="firstName" placeholder="Vardas" />
-          <AppFormField name="lastName" placeholder="Pavardė" />
-          <AppFormField
-            keyboardType="email-address"
-            name="email"
-            placeholder="E-paštas"
-            textContentType="emailAddress"
-          />
-          <AppFormField
-            name="password"
-            placeholder="Slaptažodis"
-            secureTextEntry
-            textContentType="password"
-          />
-          <View style={{ flexDirection: 'row', gap: 10 }}>
-            <AppText
-              style={{ color: !isTeacher ? colors.PINK : colors.GRAY }}
-              onPress={() => {
-                setIsTeacher(false);
-              }}>
-              Mokinys
-            </AppText>
-            <AppText
-              style={{
-                color: isTeacher ? colors.PINK : colors.GRAY,
-              }}
-              onPress={() => {
-                setIsTeacher(true);
-              }}>
-              Mokytojas
-            </AppText>
+      <RoundedContainer tr tl style={styles.containerBottom}>
+        <AppForm
+          initialValues={{
+            email: '',
+            firstName: '',
+            lastName: '',
+            password: '',
+          }}
+          onSubmit={handleSignUp}
+          validationSchema={validationSchema}>
+          <AppErrorMessage error={error} visible={error} />
+
+          <View style={styles.block}>
+            <AppFormField name="firstName" placeholder="Vardas" />
+            <AppFormField name="lastName" placeholder="Pavardė" />
+            <AppFormField
+              keyboardType="email-address"
+              name="email"
+              placeholder="E-paštas"
+              textContentType="emailAddress"
+            />
+            <AppFormField
+              name="password"
+              placeholder="Slaptažodis"
+              secureTextEntry
+              textContentType="password"
+            />
+            <View style={{ flexDirection: 'row', gap: 10, paddingTop: 10 }}>
+              <AppText
+                style={{ color: !isTeacher ? colors.PINK : colors.GRAY }}
+                onPress={() => {
+                  setIsTeacher(false);
+                }}>
+                Mokinys
+              </AppText>
+              <AppText
+                style={{
+                  color: isTeacher ? colors.PINK : colors.GRAY,
+                }}
+                onPress={() => {
+                  setIsTeacher(true);
+                }}>
+                Mokytojas
+              </AppText>
+            </View>
           </View>
+          <SubmitButton title="Susikurk paskyrą" style={styles.button} />
+        </AppForm>
+        <View style={styles.block}>
+          <AppText style={[text.subtitle, { paddingBottom: 10 }]}>
+            Jau esi susikūręs paskyrą?
+          </AppText>
+          <AppButton
+            color="secondary"
+            onPress={handleSingIn}
+            style={styles.button}
+            title="Prisijunk"
+          />
         </View>
-        <SubmitButton title="Susikurk paskyrą" style={styles.button} />
-      </AppForm>
-      <View style={styles.containerLower}>
-        <AppText style={[text.subtitle, { paddingBottom: 10 }]}>
-          Jau esi susikūręs paskyrą?
-        </AppText>
-        <AppButton
-          color="secondary"
-          onPress={handleSingIn}
-          style={styles.button}
-          title="Prisijunk"
-        />
-      </View>
+      </RoundedContainer>
     </View>
   );
 };
@@ -112,22 +132,21 @@ const signUp = () => {
 export default signUp;
 
 const styles = StyleSheet.create({
+  block: {
+    alignItems: 'center',
+    paddingVertical: 50,
+    width: '80%',
+  },
   button: {
-    width: '50%',
+    width: '80%',
   },
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: colors.WHITE,
+    flex: 1,
   },
-  containerLower: {
+  containerBottom: {
     alignItems: 'center',
-    paddingTop: 50,
-    width: '100%',
-  },
-  containerInputFields: {
-    alignItems: 'center',
-    paddingHorizontal: 50,
-    paddingVertical: 20,
-    width: '100%',
+    marginLeft: 0,
+    marginRight: 0,
   },
 });

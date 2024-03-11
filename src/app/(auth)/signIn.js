@@ -9,10 +9,16 @@ import AppErrorMessage from '../../components/forms/AppErrorMessage';
 import AppForm from '../../components/forms/AppFrom';
 import AppFormField from '../../components/forms/AppFormField';
 import AppText from '../../components/AppText';
+import IconButton from '../../components/IconButton';
+import RoundedContainer from '../../components/RoundedContainer';
+import RoundedContainerAnother from '../../components/RoundedContainerAnother';
 import SubmitButton from '../../components/forms/SubmitButton';
 
-import firebaseClient from '../../api/firebaseClient';
+import colors from '../../config/colors';
+import icons from '../../config/icons';
 import text from '../../config/text';
+
+import firebaseClient from '../../api/firebaseClient';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -54,44 +60,56 @@ const SignIn = () => {
 
   return (
     <View style={styles.container}>
+      <RoundedContainerAnother
+        mainComponent={
+          <AppText style={[text.title, { color: colors.WHITE }]}>
+            Prisijunk
+          </AppText>
+        }
+        leftComponent={<IconButton name={icons.close} onPress={router.back} />}
+      />
+
       <AppActivityIndicator visible={isLoading} />
 
-      <AppText>Sign In</AppText>
-      <AppForm
-        initialValues={{ email: '', password: '' }}
-        onSubmit={handleSingIn}
-        validationSchema={validationSchema}>
-        <AppErrorMessage
-          error="Invalid email and/or password."
-          visible={loginFailed}
-        />
-        <View style={styles.containerInputFields}>
-          <AppFormField
-            keyboardType="email-address"
-            name="email"
-            placeholder="E-paštas"
-            textContentType="emailAddress"
+      <RoundedContainer tl tr style={styles.containerBottom}>
+        <AppForm
+          initialValues={{ email: '', password: '' }}
+          onSubmit={handleSingIn}
+          validationSchema={validationSchema}>
+          <AppErrorMessage
+            error="Invalid email and/or password."
+            visible={loginFailed}
           />
-          <AppFormField
-            name="password"
-            placeholder="Slaptažodis"
-            secureTextEntry
-            textContentType="password"
+          <View style={styles.block}>
+            <AppFormField
+              keyboardType="email-address"
+              name="email"
+              placeholder="E-paštas"
+              textContentType="emailAddress"
+            />
+            <AppFormField
+              name="password"
+              placeholder="Slaptažodis"
+              secureTextEntry
+              textContentType="password"
+            />
+          </View>
+
+          <SubmitButton title="Prisijunk" style={styles.button} />
+        </AppForm>
+
+        <View style={styles.block}>
+          <AppText style={[text.subtitle, { paddingBottom: 10 }]}>
+            Neturi paskyros?
+          </AppText>
+          <AppButton
+            color="secondary"
+            onPress={handleSignUp}
+            style={styles.button}
+            title="Susikurk paskyrą"
           />
         </View>
-        <SubmitButton title="Prisijunk" style={styles.button} />
-      </AppForm>
-      <View style={styles.containerLower}>
-        <AppText style={[text.subtitle, { paddingBottom: 10 }]}>
-          Neturi paskyros?
-        </AppText>
-        <AppButton
-          color="secondary"
-          onPress={handleSignUp}
-          style={styles.button}
-          title="Susikurk paskyrą"
-        />
-      </View>
+      </RoundedContainer>
     </View>
   );
 };
@@ -99,22 +117,21 @@ const SignIn = () => {
 export default SignIn;
 
 const styles = StyleSheet.create({
+  block: {
+    alignItems: 'center',
+    paddingVertical: 50,
+    width: '80%',
+  },
   button: {
-    width: '50%',
+    width: '80%',
   },
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: colors.WHITE,
+    flex: 1,
   },
-  containerLower: {
+  containerBottom: {
     alignItems: 'center',
-    paddingTop: 50,
-    width: '100%',
-  },
-  containerInputFields: {
-    alignItems: 'center',
-    paddingHorizontal: 50,
-    paddingVertical: 20,
-    width: '100%',
+    marginLeft: 0,
+    marginRight: 0,
   },
 });
