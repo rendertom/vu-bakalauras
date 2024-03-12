@@ -13,6 +13,7 @@ import {
   getDocs,
   query,
   setDoc,
+  updateDoc,
   where,
 } from 'firebase/firestore';
 
@@ -134,4 +135,9 @@ export default {
   },
 
   signOut: async () => await AUTH.signOut(),
+
+  async updateConnection(id, connection) {
+    const docRef = doc(DB, `${COLLECTION_CONNECTIONS}/${id}`);
+    await updateDoc(docRef, connection);
+  },
 };

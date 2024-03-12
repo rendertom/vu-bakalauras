@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
+import { router } from 'expo-router';
 
 import AppButton from '../../../components/AppButton';
 import AppFlatList from '../../../components/AppFlatList';
+import IconButton from '../../../components/IconButton';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
 import SafeStatusBar from '../../../components/SafeStatusBar';
 import TeacherListItem from '../../../components/TeacherListItem';
 
 import colors from '../../../config/colors';
+import icons from '../../../config/icons';
 import images from '../../../config/images';
 
 import firebaseClient from '../../../api/firebaseClient';
-import { router } from 'expo-router';
 
 const TeacherScreen = () => {
   const [users, setUsers] = useState([]);
@@ -27,6 +29,14 @@ const TeacherScreen = () => {
 
       <RoundedContainerAnother
         mainComponent={<Image source={images.icon} style={styles.image} />}
+        rightComponent={
+          <IconButton
+            name={icons.account}
+            onPress={() => {
+              router.push({ pathname: '(teacher)/followers' });
+            }}
+          />
+        }
       />
 
       <RoundedContainer tr br style={{ flex: 1 }} style_inner={{ flex: 1 }}>

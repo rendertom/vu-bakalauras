@@ -13,6 +13,7 @@ const TeacherLayout = () => {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="exams" />
+      <Stack.Screen name="followers" />
       <Stack.Screen name="results" />
     </Stack>
   );
