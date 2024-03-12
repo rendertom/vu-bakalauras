@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 
+import { AuthContext } from '../../../context/AuthContext';
+
 import AppButton from '../../../components/AppButton';
 import AppFlatList from '../../../components/AppFlatList';
+import AppActivityIndicator from '../../../components/AppActivityIndicator';
 import IconButton from '../../../components/IconButton';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
@@ -11,21 +14,44 @@ import SafeStatusBar from '../../../components/SafeStatusBar';
 import TeacherListItem from '../../../components/TeacherListItem';
 
 import colors from '../../../config/colors';
+import connectionStatus from '../../../config/connectionStatus';
 import icons from '../../../config/icons';
 import images from '../../../config/images';
 
 import firebaseClient from '../../../api/firebaseClient';
 
 const TeacherScreen = () => {
-  const [users, setUsers] = useState([]);
+  const { user } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState();
+  const [students, setStudents] = useState([]);
 
   useEffect(() => {
-    firebaseClient.getStudents().then((users) => setUsers(users));
+    const init = async () => {
+      setIsLoading(true);
+
+      const connections = await firebaseClient.getConnectionsBy(
+        'teacherId',
+        user.uid
+      );
+
+      await Promise.all(
+        connections.map(async (connection) => {
+          if (connection.status !== connectionStatus.ACCEPTED) return;
+          const student = await firebaseClient.getUser(connection.studentId);
+          setStudents((prev) => [student.data(), ...prev]);
+        })
+      );
+
+      setIsLoading(false);
+    };
+    init();
   }, []);
 
   return (
     <View style={{ backgroundColor: colors.VIOLET, flex: 1 }}>
       <SafeStatusBar />
+
+      <AppActivityIndicator visible={isLoading} />
 
       <RoundedContainerAnother
         mainComponent={<Image source={images.icon} style={styles.image} />}
@@ -33,7 +59,7 @@ const TeacherScreen = () => {
           <IconButton
             name={icons.account}
             onPress={() => {
-              router.push({ pathname: '(teacher)/followers' });
+              router.navigate({ pathname: '(teacher)/followers' });
             }}
           />
         }
@@ -41,7 +67,7 @@ const TeacherScreen = () => {
 
       <RoundedContainer tr br style={{ flex: 1 }} style_inner={{ flex: 1 }}>
         <AppFlatList
-          data={users}
+          data={students}
           renderItem={({ item: user }) => (
             <TeacherListItem
               subtitle={user.email}
