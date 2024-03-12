@@ -40,7 +40,7 @@ function RootLayoutNav() {
       <Stack.Screen name="index" />
       <Stack.Screen name="(aritmetika)" />
       <Stack.Screen name="(auth)" options={{ presentation: 'modal' }} />
-      <Stack.Screen name="(school)" />
+      <Stack.Screen name="(school)" options={{ presentation: 'modal' }} />
     </Stack>
   );
 }

@@ -18,6 +18,7 @@ const SchoolLayout = () => {
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="answersFinal" />
           <Stack.Screen name="course" />
+          <Stack.Screen name="followers" />
           <Stack.Screen name="task" />
           <Stack.Screen name="topic" />
         </Stack>

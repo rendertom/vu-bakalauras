@@ -2,10 +2,9 @@ import { useContext } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 
-import { AuthContext } from '../../../context/AuthContext';
-
 import AppButton from '../../../components/AppButton';
 import AppText from '../../../components/AppText';
+import IconButton from '../../../components/IconButton';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
 import SafeStatusBar from '../../../components/SafeStatusBar';
@@ -14,24 +13,29 @@ import SectionTitle from '../../../components/SectionTitle';
 import firebaseClient from '../../../api/firebaseClient';
 
 import colors from '../../../config/colors';
+import icons from '../../../config/icons';
 import text from '../../../config/text';
 
 import school from '../../../data/school';
 
 const StudentScreen = () => {
-  const { user } = useContext(AuthContext);
-
   return (
     <ScrollView style={{ backgroundColor: colors.VIOLET }}>
       <SafeStatusBar />
 
       <RoundedContainerAnother
         mainComponent={
-          <AppText
-            style={[
-              text.title,
-              { color: colors.WHITE },
-            ]}>{`Labas, ${user?.firstName} 👋`}</AppText>
+          <AppText style={[text.title, { color: colors.WHITE }]}>👋</AppText>
+        }
+        rightComponent={
+          <IconButton
+            name={icons.account}
+            onPress={() => {
+              router.navigate({
+                pathname: 'followers',
+              });
+            }}
+          />
         }
       />
 
