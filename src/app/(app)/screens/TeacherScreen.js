@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
-import { router } from 'expo-router';
+import { router, useSegments } from 'expo-router';
 
 import { AuthContext } from '../../../context/AuthContext';
 
@@ -21,6 +21,8 @@ import images from '../../../config/images';
 import firebaseClient from '../../../api/firebaseClient';
 
 const TeacherScreen = () => {
+  const segments = useSegments();
+
   const { user } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState();
   const [students, setStudents] = useState([]);
@@ -28,6 +30,7 @@ const TeacherScreen = () => {
   useEffect(() => {
     const init = async () => {
       setIsLoading(true);
+      setStudents([]);
 
       const connections = await firebaseClient.getConnectionsBy(
         'teacherId',
@@ -44,8 +47,12 @@ const TeacherScreen = () => {
 
       setIsLoading(false);
     };
-    init();
-  }, []);
+
+    // Hack: forcing to reload each time user hits homepage
+    if (segments.length === 1 && segments[0] === '(app)') {
+      init();
+    }
+  }, [segments]);
 
   return (
     <View style={{ backgroundColor: colors.VIOLET, flex: 1 }}>
