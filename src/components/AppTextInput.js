@@ -8,7 +8,7 @@ const AppTextInput = ({ ...otherPros }) => (
   <TextInput
     autoCapitalize="none"
     autoCorrect={false}
-    placeholderTextColor={colors.yellow}
+    placeholderTextColor={colors.GRAY}
     {...otherPros}
     style={styles.textInput}
   />

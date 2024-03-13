@@ -78,7 +78,7 @@ const SectionBlock = ({ courseId, section, index, isLast }) => {
     if (userHasMasteredSection(sectionId) && isOpen) {
       return (
         <AppButton
-          style={styles.button}
+          style={[styles.button, { paddingHorizontal: 80 }]}
           title={'nori perlaikyti?'}
           color="secondary"
           onPress={() => handleTestButtonClick(sectionId, 'EXAM')}
@@ -107,7 +107,7 @@ const SectionBlock = ({ courseId, section, index, isLast }) => {
           shouldBeOpen
             ? canTakeExam(sectionId)
               ? 'Pabandyk išlaikyti egzaminą'
-              : 'Pasimokink'
+              : 'Pasimokyk'
             : null
         }
         someComponent={

@@ -66,7 +66,7 @@ const AnswersFinalScreen = () => {
       return gotGoodGrade()
         ? canTakeExam(sectionId)
           ? `Puikiai padirbėta! Tu gerai moki temą "${getTopicName()}". Pamėgink išlaikyti egzaminą!`
-          : `Puikiai padirbėta! Tu gerai moki temą "${getTopicName()}". Pasimokink sekančią temą!`
+          : `Puikiai padirbėta! Tu gerai moki temą "${getTopicName()}". Pasimokyk sekančią temą!`
         : `Dar reikia pasimokyti. Grįžk atgal ir pasikartok temą "${getTopicName()}".`;
     }
 
