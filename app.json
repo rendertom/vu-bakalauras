@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "test1",
-    "slug": "test1",
-    "scheme": "test1",
+    "name": "vu-bakalauras",
+    "slug": "vu-bakalauras",
+    "scheme": "vu-bakalauras",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
