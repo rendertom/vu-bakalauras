@@ -6,10 +6,11 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build": "eas build -p android --profile preview"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^1.22.3",
+    "@react-native-async-storage/async-storage": "1.21.0",
     "expo": "~50.0.11",
     "expo-constants": "~15.4.5",
     "expo-font": "~11.10.3",
@@ -18,7 +19,7 @@
     "expo-status-bar": "~1.11.1",
     "firebase": "^10.8.1",
     "formik": "^2.2.9",
-    "lottie-react-native": "^6.7.0",
+    "lottie-react-native": "6.5.1",
     "react": "18.2.0",
     "react-native": "0.73.4",
     "react-native-alert-async": "^1.0.5",
@@ -28,7 +29,8 @@
     "react-native-safearea-height": "^1.0.6",
     "react-native-screens": "~3.29.0",
     "react-native-star-rating-widget": "^1.7.3",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "expo-dev-client": "~3.3.9"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
