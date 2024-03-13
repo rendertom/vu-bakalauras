@@ -75,18 +75,25 @@ const SectionBlock = ({ courseId, section, index, isLast }) => {
   };
 
   const getTakeExamButton = (sectionId) => {
-    return (
-      <AppButton
-        style={styles.button}
-        title={
-          userHasMasteredSection(sectionId)
-            ? 'nori perlaikyti?'
-            : 'laikyk egzaminą'
-        }
-        color="secondary"
-        onPress={() => handleTestButtonClick(sectionId, 'EXAM')}
-      />
-    );
+    if (userHasMasteredSection(sectionId) && isOpen) {
+      return (
+        <AppButton
+          style={styles.button}
+          title={'nori perlaikyti?'}
+          color="secondary"
+          onPress={() => handleTestButtonClick(sectionId, 'EXAM')}
+        />
+      );
+    } else if (!userHasMasteredSection(sectionId)) {
+      return (
+        <AppButton
+          style={styles.button}
+          title="laikyk egzaminą"
+          color="secondary"
+          onPress={() => handleTestButtonClick(sectionId, 'EXAM')}
+        />
+      );
+    }
   };
 
   const getSectionTitle = (title, color, sectionId, iconBGColor) => {
@@ -95,6 +102,7 @@ const SectionBlock = ({ courseId, section, index, isLast }) => {
         title={title}
         color={color}
         showCheckmark={userHasMasteredSection(sectionId)}
+        showAlertmark={tookInitialExam(sectionId) && !canTakeExam(sectionId)}
         subtitle={
           shouldBeOpen
             ? canTakeExam(sectionId)

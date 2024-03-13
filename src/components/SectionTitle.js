@@ -12,6 +12,7 @@ const SectionTitle = ({
   title,
   color,
   subtitle,
+  showAlertmark,
   showCheckmark,
   someComponent,
   rightIcon,
@@ -22,6 +23,13 @@ const SectionTitle = ({
         <AppIcon
           color={colors.BLUE}
           name={icons.correct}
+          style={{ paddingRight: 10 }}
+        />
+      ) : null}
+      {showAlertmark ? (
+        <AppIcon
+          color={colors.PINK}
+          name={icons.alert}
           style={{ paddingRight: 10 }}
         />
       ) : null}

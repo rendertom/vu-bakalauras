@@ -1,6 +1,7 @@
 export default {
   account: 'account-outline',
   addition: 'plus-box',
+  alert: 'alert-circle-outline',
   arrowDown: 'chevron-down',
   arrowLeft: 'chevron-left',
   arrowRight: 'chevron-right',
