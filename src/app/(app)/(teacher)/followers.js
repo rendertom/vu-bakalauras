@@ -11,6 +11,7 @@ import IconButton from '../../../components/IconButton';
 import ListItemSeparator from '../../../components/ListItemSeparator';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
+import SafeStatusBar from '../../../components/SafeStatusBar';
 import SectionTitle from '../../../components/SectionTitle';
 
 import colors from '../../../config/colors';
@@ -95,6 +96,7 @@ const FollowersTeacher = () => {
     <ScrollView
       style={{ backgroundColor: colors.VIOLET, flex: 1 }}
       contentContainerStyle={{ flexGrow: 1 }}>
+      <SafeStatusBar />
       <AppActivityIndicator visible={isLoading} />
 
       <RoundedContainerAnother
@@ -114,6 +116,12 @@ const FollowersTeacher = () => {
           title="Mokiniai"
           subtitle="Vartotojai, kurių progresą galite matyti"
         />
+        {accepted.length === 0 && (
+          <AppText
+            style={[text.default, { alignSelf: 'center', color: colors.GRAY }]}>
+            Čia nieko nėra
+          </AppText>
+        )}
         {accepted.map((user, index) => (
           <View key={index}>
             {index > 0 && <ListItemSeparator />}
@@ -135,6 +143,15 @@ const FollowersTeacher = () => {
           title="Laukia patvirtinimo"
           subtitle="Vartotojai, kurių kvietimo dar nepatvirtinote"
         />
+        {pending.length === 0 && (
+          <AppText
+            style={[
+              text.default,
+              { alignSelf: 'center', color: colors.WHITE },
+            ]}>
+            Čia nieko nėra
+          </AppText>
+        )}
         {pending.map((user, index) => (
           <View key={index}>
             {index > 0 && <ListItemSeparator onLight={false} />}

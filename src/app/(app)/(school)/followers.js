@@ -14,6 +14,7 @@ import ListItemSeparator from '../../../components/ListItemSeparator';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
 import SectionTitle from '../../../components/SectionTitle';
+import SafeStatusBar from '../../../components/SafeStatusBar';
 
 import colors from '../../../config/colors';
 import connectionStatus from '../../../config/connectionStatus';
@@ -118,12 +119,13 @@ const FollowersStudent = () => {
     <ScrollView
       style={{ backgroundColor: colors.VIOLET, flex: 1 }}
       contentContainerStyle={{ flexGrow: 1 }}>
+      <SafeStatusBar />
       <AppActivityIndicator visible={isLoading} />
 
       <RoundedContainerAnother
         mainComponent={
           <AppText style={[text.title, { color: colors.WHITE }]}>
-            Stebėtojai
+            Mokytojai
           </AppText>
         }
         leftComponent={
@@ -134,9 +136,15 @@ const FollowersStudent = () => {
       <RoundedContainer tr br>
         <SectionTitle
           color={colors.GRAY}
-          title="Stebėtojai"
+          title="Mokytojai"
           subtitle="Vartotojai, kurie gali matyti jūsų progresą"
         />
+        {accepted.length === 0 && (
+          <AppText
+            style={[text.default, { alignSelf: 'center', color: colors.GRAY }]}>
+            Čia nieko nėra
+          </AppText>
+        )}
         {accepted.map((user, index) => (
           <View key={index}>
             {index > 0 && <ListItemSeparator />}
@@ -155,6 +163,15 @@ const FollowersStudent = () => {
           title="Laukia patvirtinimo"
           subtitle="Vartotojai, kurie dar nepatvirtino jūsų kvietimo"
         />
+        {pending.length === 0 && (
+          <AppText
+            style={[
+              text.default,
+              { alignSelf: 'center', color: colors.WHITE },
+            ]}>
+            Čia nieko nėra
+          </AppText>
+        )}
         {pending.map((user, index) => (
           <View key={index}>
             {index > 0 && <ListItemSeparator onLight={false} />}
@@ -171,7 +188,7 @@ const FollowersStudent = () => {
       <RoundedContainer
         tr
         style={{ marginLeft: 0, marginRight: 0, paddintBottom: 50 }}>
-        <SectionTitle color={colors.GRAY} title="Pakviest stebėtoją" />
+        <SectionTitle color={colors.GRAY} title="Pakviest mokytoją" />
         <View style={{ alignItems: 'center', paddingHorizontal: 20 }}>
           <AppTextInput
             placeholder="E-paštas"
