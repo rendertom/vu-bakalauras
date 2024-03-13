@@ -100,6 +100,7 @@ const FollowersTeacher = () => {
       <AppActivityIndicator visible={isLoading} />
 
       <RoundedContainerAnother
+        bl
         mainComponent={
           <AppText style={[text.title, { color: colors.WHITE }]}>
             Mokiniai

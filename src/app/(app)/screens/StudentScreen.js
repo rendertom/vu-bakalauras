@@ -47,6 +47,7 @@ const StudentScreen = () => {
         <AppButton
           style={styles.button}
           title="aritmetika"
+          icon={icons.calculator}
           onPress={() => {
             router.push({
               pathname: 'setupScreen',
@@ -59,7 +60,7 @@ const StudentScreen = () => {
         <SectionTitle
           color={colors.GRAY_LIGHT}
           title="Adaptyvi mokykla"
-          subtitle="Įveik pradinių klasių matematikos kursą"
+          subtitle="Įveik pradinių klasių aritmetikos kursą"
         />
         {school.courses.map((course, index) => (
           <AppButton
@@ -80,6 +81,7 @@ const StudentScreen = () => {
         <AppButton
           style={styles.button}
           title="atsijungti"
+          icon={icons.logOut}
           onPress={() => {
             firebaseClient.signOut();
           }}

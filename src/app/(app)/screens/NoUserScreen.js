@@ -9,6 +9,7 @@ import SectionTitle from '../../../components/SectionTitle';
 
 import colors from '../../../config/colors';
 import images from '../../../config/images';
+import icons from '../../../config/icons';
 
 const NoUserScreen = () => {
   return (
@@ -23,7 +24,7 @@ const NoUserScreen = () => {
         <SectionTitle
           color={colors.GRAY}
           title="Tu esi neprisijungęs"
-          subtitle="Prisijungęs galėsi mokytis matematikos kursą"
+          subtitle="Prisijungęs galėsi mokytis aritmetikos kursą"
         />
         <AppButton
           style={styles.button}
@@ -46,6 +47,7 @@ const NoUserScreen = () => {
           color="secondary"
           style={styles.button}
           title="aritmetika"
+          icon={icons.calculator}
           onPress={() => {
             router.push({
               pathname: 'setupScreen',

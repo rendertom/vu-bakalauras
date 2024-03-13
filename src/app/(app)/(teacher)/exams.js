@@ -14,6 +14,7 @@ import icons from '../../../config/icons';
 import text from '../../../config/text';
 
 import firebaseClient from '../../../api/firebaseClient';
+import AppActivityIndicator from '../../../components/AppActivityIndicator';
 
 const ExamsScreen = () => {
   const user = useLocalSearchParams();
@@ -28,7 +29,7 @@ const ExamsScreen = () => {
   }, []);
 
   return (
-    <View style={{ backgroundColor: colors.WHITE, height: '100%' }}>
+    <View style={{ backgroundColor: colors.WHITE, flex: 1 }}>
       <SafeStatusBar backgroundColor={colors.VIOLET} />
 
       <RoundedContainerAnother
@@ -47,12 +48,12 @@ const ExamsScreen = () => {
         }
       />
 
-      <AppText style={text.sectionTitle}>Egzaminų sąrašas</AppText>
+      <AppActivityIndicator visible={isLoading} />
 
-      {isLoading ? (
-        <AppText>loading...</AppText>
-      ) : exams.length === 0 ? (
-        <AppText>Vartotojas dar nelaikė egzaminų</AppText>
+      {!isLoading && exams.length === 0 ? (
+        <AppText style={{ alignSelf: 'center', paddingTop: 20 }}>
+          Vartotojas dar nelaikė egzaminų
+        </AppText>
       ) : (
         <AppFlatList
           data={exams}

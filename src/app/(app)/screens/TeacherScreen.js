@@ -94,6 +94,7 @@ const TeacherScreen = () => {
         <AppButton
           style={styles.button}
           title="atsijungti"
+          icon={icons.logOut}
           onPress={() => {
             firebaseClient.signOut();
           }}
