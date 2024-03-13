@@ -13,8 +13,8 @@ import IconButton from '../../../components/IconButton';
 import ListItemSeparator from '../../../components/ListItemSeparator';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
-import SectionTitle from '../../../components/SectionTitle';
 import SafeStatusBar from '../../../components/SafeStatusBar';
+import SectionTitle from '../../../components/SectionTitle';
 
 import colors from '../../../config/colors';
 import connectionStatus from '../../../config/connectionStatus';
@@ -101,16 +101,16 @@ const FollowersStudent = () => {
       return Alert.alert('Pakvietimas jau buvo išsiųstas anksčiau');
     }
 
-    const payload = {
+    const connection = {
       id: Date.now().toString(),
       status: connectionStatus.PENDING,
       studentId: user.uid,
       teacherId: teacher.uid,
     };
 
-    await firebaseClient.createConnection(payload);
+    await firebaseClient.createConnection(connection);
 
-    setPending([teacher, ...pending]);
+    setPending([{ ...teacher, connection }, ...pending]);
 
     setIsLoading(false);
   };
