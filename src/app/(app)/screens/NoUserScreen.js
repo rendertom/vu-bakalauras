@@ -22,8 +22,8 @@ const NoUserScreen = () => {
       <RoundedContainer tr br>
         <SectionTitle
           color={colors.GRAY}
-          subtitle="Prisijungęs galėsi mokintis matematikos kursą"
           title="Tu esi neprisijungęs"
+          subtitle="Prisijungęs galėsi mokytis matematikos kursą"
         />
         <AppButton
           style={styles.button}
@@ -39,12 +39,13 @@ const NoUserScreen = () => {
       <RoundedContainer isPrimary tl style={styles.containerLast}>
         <SectionTitle
           color={colors.GRAY_LIGHT}
-          title="Spręsk aritmetinius uždavinius"
+          title="Aritmetika"
+          subtitle="Susidėliok užduotis pagal sudėtingumą"
         />
         <AppButton
           color="secondary"
           style={styles.button}
-          title="matematika"
+          title="aritmetika"
           onPress={() => {
             router.push({
               pathname: 'setupScreen',

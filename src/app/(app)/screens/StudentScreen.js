@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 
@@ -42,11 +41,12 @@ const StudentScreen = () => {
       <RoundedContainer tr br>
         <SectionTitle
           color={colors.GRAY}
-          title="Spręsk aritmetinius uždavinius"
+          title="Aritmetika"
+          subtitle="Susidėliok užduotis pagal sudėtingumą"
         />
         <AppButton
           style={styles.button}
-          title="matematika"
+          title="aritmetika"
           onPress={() => {
             router.push({
               pathname: 'setupScreen',
@@ -56,7 +56,11 @@ const StudentScreen = () => {
       </RoundedContainer>
 
       <RoundedContainer isPrimary tl bl style={{ paddingBottom: 20 }}>
-        <SectionTitle color={colors.GRAY_LIGHT} title="Adaptyvi mokykla" />
+        <SectionTitle
+          color={colors.GRAY_LIGHT}
+          title="Adaptyvi mokykla"
+          subtitle="Įveik pradinių klasių matematikos kursą"
+        />
         {school.courses.map((course, index) => (
           <AppButton
             style={styles.buttonClass}
@@ -75,7 +79,7 @@ const StudentScreen = () => {
       <RoundedContainer tr style={styles.containerLast}>
         <AppButton
           style={styles.button}
-          title="atsiungti"
+          title="atsijungti"
           onPress={() => {
             firebaseClient.signOut();
           }}

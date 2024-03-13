@@ -93,7 +93,7 @@ const TeacherScreen = () => {
       <RoundedContainer isPrimary tl style={styles.containerLast}>
         <AppButton
           style={styles.button}
-          title="logout"
+          title="atsijungti"
           onPress={() => {
             firebaseClient.signOut();
           }}
