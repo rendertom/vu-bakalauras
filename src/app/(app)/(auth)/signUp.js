@@ -12,6 +12,7 @@ import AppText from '../../../components/AppText';
 import IconButton from '../../../components/IconButton';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
+import SafeStatusBar from '../../../components/SafeStatusBar';
 import SubmitButton from '../../../components/forms/SubmitButton';
 
 import colors from '../../../config/colors';
@@ -54,6 +55,8 @@ const SignUp = () => {
 
   return (
     <View style={styles.container}>
+      <SafeStatusBar iosHidden backgroundColor={colors.VIOLET} />
+
       <RoundedContainerAnother
         mainComponent={
           <AppText style={[text.title, { color: colors.WHITE }]}>
