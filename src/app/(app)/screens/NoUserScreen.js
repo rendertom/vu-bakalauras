@@ -1,7 +1,8 @@
 import { router } from 'expo-router';
-import { Image, ScrollView, StyleSheet } from 'react-native';
+import { Image, ScrollView, StyleSheet, View } from 'react-native';
 
 import AppButton from '../../../components/AppButton';
+import AppText from '../../../components/AppText';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
 import SafeStatusBar from '../../../components/SafeStatusBar';
@@ -10,6 +11,7 @@ import SectionTitle from '../../../components/SectionTitle';
 import colors from '../../../config/colors';
 import images from '../../../config/images';
 import icons from '../../../config/icons';
+import text from '../../../config/text';
 
 const NoUserScreen = () => {
   return (
@@ -55,6 +57,12 @@ const NoUserScreen = () => {
           }}
         />
       </RoundedContainer>
+
+      <View style={{ paddingTop: 50, paddingLeft: 10 }}>
+        <AppText style={text.subtitle}>
+          {`Tomas Šinkūnas\nVU ISI IV kursas, 2024\nBakalauro baigiamasis darbas`}
+        </AppText>
+      </View>
     </ScrollView>
   );
 };
