@@ -5,8 +5,9 @@ import { router, useSegments } from 'expo-router';
 import { AuthContext } from '../../../context/AuthContext';
 
 import AppButton from '../../../components/AppButton';
-import AppFlatList from '../../../components/AppFlatList';
 import AppActivityIndicator from '../../../components/AppActivityIndicator';
+import AppFlatList from '../../../components/AppFlatList';
+import AppText from '../../../components/AppText';
 import IconButton from '../../../components/IconButton';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
@@ -17,6 +18,7 @@ import colors from '../../../config/colors';
 import connectionStatus from '../../../config/connectionStatus';
 import icons from '../../../config/icons';
 import images from '../../../config/images';
+import text from '../../../config/text';
 
 import firebaseClient from '../../../api/firebaseClient';
 
@@ -25,11 +27,13 @@ const TeacherScreen = () => {
 
   const { user } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState();
+  const [pending, setPending] = useState([]);
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
     const init = async () => {
       setIsLoading(true);
+      setPending([]);
       setStudents([]);
 
       const connections = await firebaseClient.getConnectionsBy(
@@ -39,9 +43,15 @@ const TeacherScreen = () => {
 
       await Promise.all(
         connections.map(async (connection) => {
-          if (connection.status !== connectionStatus.ACCEPTED) return;
           const student = await firebaseClient.getUser(connection.studentId);
-          setStudents((prev) => [student.data(), ...prev]);
+
+          const data = { ...student.data(), connection };
+
+          if (connection.status === connectionStatus.PENDING) {
+            setPending((prev) => [data, ...prev]);
+          } else if (connection.status === connectionStatus.ACCEPTED) {
+            setStudents((prev) => [data, ...prev]);
+          }
         })
       );
 
@@ -54,6 +64,19 @@ const TeacherScreen = () => {
     }
   }, [segments]);
 
+  const getNoContent = () => {
+    return (
+      <View style={{ alignItems: 'center' }}>
+        <AppText style={[text.default, { paddingTop: 20 }]}>
+          Jūs neturite mokinių
+        </AppText>
+        <AppText style={[text.subtitle, { textAlign: 'center' }]}>
+          {`Iš mokinio paskyros prisidėkite mokytoją, norodydami ${user.email} e-paštą.`}
+        </AppText>
+      </View>
+    );
+  };
+
   return (
     <View style={{ backgroundColor: colors.VIOLET, flex: 1 }}>
       <SafeStatusBar />
@@ -64,7 +87,8 @@ const TeacherScreen = () => {
         mainComponent={<Image source={images.icon} style={styles.image} />}
         rightComponent={
           <IconButton
-            name={icons.account}
+            name={pending.length ? icons.accountPlus : icons.account}
+            style={pending.length ? { backgroundColor: colors.PINK } : null}
             onPress={() => {
               router.navigate({ pathname: '(teacher)/followers' });
             }}
@@ -73,21 +97,24 @@ const TeacherScreen = () => {
       />
 
       <RoundedContainer tr br style={{ flex: 1 }} style_inner={{ flex: 1 }}>
-        <AppFlatList
-          data={students}
-          renderItem={({ item: user }) => (
-            <TeacherListItem
-              subtitle={user.email}
-              title={`${user.firstName} ${user.lastName}`}
-              onPress={() => {
-                router.push({
-                  pathname: 'exams',
-                  params: user,
-                });
-              }}
-            />
-          )}
-        />
+        {!isLoading && students.length === 0 && getNoContent()}
+        {!isLoading && students.length > 0 && (
+          <AppFlatList
+            data={students}
+            renderItem={({ item: user }) => (
+              <TeacherListItem
+                subtitle={user.email}
+                title={`${user.firstName} ${user.lastName}`}
+                onPress={() => {
+                  router.push({
+                    pathname: 'exams',
+                    params: user,
+                  });
+                }}
+              />
+            )}
+          />
+        )}
       </RoundedContainer>
 
       <RoundedContainer isPrimary tl style={styles.containerLast}>
