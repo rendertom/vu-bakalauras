@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { StarRatingDisplay } from 'react-native-star-rating-widget';
 import { router } from 'expo-router';
 
 import { ProgressContext } from '../context/ProgressContext.js';
@@ -12,6 +11,7 @@ import IconButton from '../components/IconButton.js';
 import ListItemSeparator from '../components/ListItemSeparator.js';
 import RoundedContainer from '../components/RoundedContainer.js';
 import SectionTitle from '../components/SectionTitle.js';
+import StarRating from './StarRating.js';
 import TopicName from '../components/TopicName.js';
 
 import colors from '../config/colors';
@@ -116,10 +116,7 @@ const SectionBlock = ({ courseId, section, index, isLast }) => {
               <AppText style={[text.subtitle, { color: color }]}>
                 {Math.max(0, Math.floor(getExamGrade(sectionId) * 10))}/10
               </AppText>
-              <StarRatingDisplay
-                starSize={16}
-                rating={getExamGrade(sectionId) * 5}
-              />
+              <StarRating starSize={16} rating={getExamGrade(sectionId) * 5} />
             </View>
           ) : null
         }

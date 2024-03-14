@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { FlatList, ScrollView, StyleSheet } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
-import { StarRatingDisplay } from 'react-native-star-rating-widget';
 
 import AppButton from '../../../components/AppButton';
 import AppText from '../../../components/AppText';
@@ -10,6 +9,7 @@ import ImageClicker from '../../../components/ImageClicker';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
 import SafeStatusBar from '../../../components/SafeStatusBar';
+import StarRating from '../../../components/StarRating';
 
 import { ProgressContext } from '../../../context/ProgressContext';
 import { TasksContext } from '../../../context/TasksContext';
@@ -67,10 +67,7 @@ const TopicScreen = () => {
           </AppText>
         }
         subComponent={
-          <StarRatingDisplay
-            starSize={16}
-            rating={getTopicGrade(topicId) * 5}
-          />
+          <StarRating starSize={16} rating={getTopicGrade(topicId) * 5} />
         }
       />
 

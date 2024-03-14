@@ -1,8 +1,8 @@
 import { StyleSheet, TouchableHighlight, View } from 'react-native';
-import { StarRatingDisplay } from 'react-native-star-rating-widget';
 
 import AppIcon from './AppIcon';
 import AppText from './AppText';
+import StarRating from './StarRating';
 
 import colors from '../config/colors';
 import icons from '../config/icons';
@@ -32,7 +32,7 @@ const TopicName = ({ onPress, scoreValue, title, onLight = true }) => {
               ]}>
               {Math.floor(scoreValue * 2)}/10
             </AppText>
-            <StarRatingDisplay starSize={16} rating={scoreValue} />
+            <StarRating starSize={16} rating={scoreValue} />
           </View>
         </View>
 

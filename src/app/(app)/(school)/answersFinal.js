@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
-import { StarRatingDisplay } from 'react-native-star-rating-widget';
 import LottieView from 'lottie-react-native';
 
 import { ProgressContext } from '../../../context/ProgressContext.js';
@@ -15,6 +14,7 @@ import IconButton from '../../../components/IconButton.js';
 import RoundedContainer from '../../../components/RoundedContainer.js';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother.js';
 import SafeStatusBar from '../../../components/SafeStatusBar.js';
+import StarRating from '../../../components/StarRating.js';
 import TitleLottie from '../../../components/TitleLottie.js';
 
 import colors from '../../../config/colors.js';
@@ -156,7 +156,7 @@ const AnswersFinalScreen = () => {
           <IconButton name={icons.arrowLeft} onPress={router.back} />
         }
         mainComponent={<TitleLottie scoreValue={scoreValue} />}
-        subComponent={<StarRatingDisplay rating={scoreValue * 5} />}
+        subComponent={<StarRating rating={scoreValue * 5} />}
       />
 
       <View style={styles.infoBlock}>
