@@ -138,16 +138,16 @@ const AnswersFinalScreen = () => {
 
   return (
     <View style={styles.container}>
-      {gotGoodGrade() ? (
-        <LottieView
-          ref={confettiRef}
-          source={images.lottie.confetti}
-          loop={false}
-          style={styles.lottie}
-          resizeMode="cover"
-          pointerEvents="none"
-        />
-      ) : null}
+      {gotGoodGrade() && (
+        <View style={styles.lottieContainer}>
+          <LottieView
+            ref={confettiRef}
+            source={images.lottie.confetti}
+            loop={false}
+            style={styles.lottie}
+          />
+        </View>
+      )}
 
       <SafeStatusBar />
 
@@ -221,8 +221,14 @@ const styles = StyleSheet.create({
   lottie: {
     width: '100%',
     height: '100%',
+    resizeMode: 'cover',
+  },
+  lottieContainer: {
+    width: '100%',
+    height: '100%',
+    pointerEvents: 'none',
     position: 'absolute',
-    zIndex: 1,
+    zIndex: 99,
   },
   text: {
     color: colors.GRAY_LIGHT,
