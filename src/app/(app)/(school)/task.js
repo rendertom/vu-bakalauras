@@ -44,6 +44,8 @@ const TaskScreen = () => {
     const stats = buildStats(tasks);
     setTopicGrades(stats, tasksType === 'EXAM');
 
+    const toNull = (value) => (typeof value === 'undefined' ? null : value);
+
     firebaseClient.saveTasks({
       userId: user.uid,
       date: Date.now(),
@@ -54,9 +56,9 @@ const TaskScreen = () => {
         .findSectionById(sectionId)
         .getName(),
       tasks: tasks.map((task) => ({
-        isCorrect: task.isCorrect,
-        userInput: task.userInput,
-        correctAnswer: task.correctAnswer,
+        isCorrect: toNull(task.isCorrect),
+        userInput: toNull(task.userInput),
+        correctAnswer: toNull(task.correctAnswer),
         sign: task.sign,
         solve: task.solve,
         values: task.values,
