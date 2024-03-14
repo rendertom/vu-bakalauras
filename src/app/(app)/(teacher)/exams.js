@@ -23,6 +23,14 @@ const ExamsScreen = () => {
 
   useState(() => {
     firebaseClient.getExamsByUser(user.uid).then((exams) => {
+      exams.sort((a, b) => {
+        const keyA = a.date;
+        const keyB = b.date;
+        if (keyA < keyB) return 1;
+        if (keyA > keyB) return -1;
+        return 0;
+      });
+
       setExams(exams);
       setIsLoading(false);
     });
