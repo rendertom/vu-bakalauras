@@ -19,7 +19,9 @@ import school from '../../../data/school';
 
 const StudentScreen = () => {
   return (
-    <ScrollView style={{ backgroundColor: colors.VIOLET }}>
+    <ScrollView
+      style={{ backgroundColor: colors.VIOLET }}
+      contentContainerStyle={{ flexGrow: 1 }}>
       <SafeStatusBar />
 
       <RoundedContainerAnother

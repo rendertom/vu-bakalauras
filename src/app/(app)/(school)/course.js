@@ -24,7 +24,9 @@ const CourseScreen = () => {
   const { clearProgress } = useContext(ProgressContext);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{ flexGrow: 1 }}>
       <SafeStatusBar />
 
       <RoundedContainerAnother

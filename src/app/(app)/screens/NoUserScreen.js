@@ -15,7 +15,9 @@ import text from '../../../config/text';
 
 const NoUserScreen = () => {
   return (
-    <ScrollView style={{ backgroundColor: colors.VIOLET }}>
+    <ScrollView
+      style={{ backgroundColor: colors.VIOLET }}
+      contentContainerStyle={{ flexGrow: 1 }}>
       <SafeStatusBar />
 
       <RoundedContainerAnother
@@ -58,7 +60,7 @@ const NoUserScreen = () => {
         />
       </RoundedContainer>
 
-      <View style={{ paddingTop: 50, paddingLeft: 10 }}>
+      <View style={styles.containerCopyright}>
         <AppText style={text.subtitle}>
           {`Tomas Šinkūnas\nVU ISI IV kursas, 2024\nBakalauro baigiamasis darbas`}
         </AppText>
@@ -73,6 +75,12 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 20,
     paddingHorizontal: 20,
+  },
+  containerCopyright: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingBottom: 10,
+    paddingLeft: 10,
   },
   containerLast: {
     marginLeft: 0,
