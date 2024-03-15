@@ -25,6 +25,7 @@ export const ProgressContext = createContext({
   calculateMeanGrade: () => {},
   canTakeExam: () => {},
   clearProgress: () => {},
+  getCourseScore: () => {},
   getExamGrade: () => {},
   getFailingTopicIDs: () => {},
   getTopicGrade: () => {},
@@ -114,6 +115,15 @@ export const ProgressProvider = ({ children }) => {
   const clearProgress = async () => {
     setCourses(_deepCopy(structure));
     await StorageService.setItem(STORAGE_KEY, _deepCopy(structure));
+  };
+
+  const getCourseScore = (courseId) => {
+    const course = courses.find((course) => course.id === courseId);
+    const successSections = course.sections.filter(
+      (section) => section.grade >= MIN_GRADE_ALLOWED_FOR_EXAM
+    );
+
+    return successSections.length / course.sections.length;
   };
 
   const getExamGrade = (sectionId) => {
@@ -240,6 +250,7 @@ export const ProgressProvider = ({ children }) => {
         calculateMeanGrade,
         canTakeExam,
         clearProgress,
+        getCourseScore,
         getExamGrade,
         getFailingTopicIDs,
         getTopicGrade,

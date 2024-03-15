@@ -10,21 +10,27 @@ import text from '../config/text';
 const size = 35;
 const width = 4;
 
-const ScoreMini = ({ value, style }) => {
+const ScoreMini = ({
+  value,
+  style,
+  backgroundColor = colors.GRAY_LIGHT,
+  tintColor = colors.VIOLET,
+  textColor = colors.DARK,
+}) => {
   return (
     <AnimatedCircularProgress
-      backgroundColor={colors.GRAY_LIGHT}
+      backgroundColor={backgroundColor}
       backgroundWidth={2}
       duration={1000}
       easing={Easing.out(Easing.ease)}
       fill={value}
       lineCap={'round'}
       size={size}
-      tintColor={colors.VIOLET}
+      tintColor={tintColor}
       width={width}
       style={style}>
       {(fill) => (
-        <AppText style={[text.subtitle, { color: colors.DARK }]}>
+        <AppText style={[text.subtitle, { color: textColor }]}>
           {parseInt(fill)}
         </AppText>
       )}

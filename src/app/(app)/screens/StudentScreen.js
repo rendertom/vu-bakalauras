@@ -3,6 +3,7 @@ import { router } from 'expo-router';
 
 import AppButton from '../../../components/AppButton';
 import AppText from '../../../components/AppText';
+import ClassButton from '../../../components/ClassButton';
 import IconButton from '../../../components/IconButton';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
@@ -14,8 +15,6 @@ import firebaseClient from '../../../api/firebaseClient';
 import colors from '../../../config/colors';
 import icons from '../../../config/icons';
 import text from '../../../config/text';
-
-import school from '../../../data/school';
 
 const StudentScreen = () => {
   return (
@@ -49,6 +48,7 @@ const StudentScreen = () => {
         <AppButton
           style={styles.button}
           title="aritmetika"
+          color="secondary"
           icon={icons.calculator}
           onPress={() => {
             router.push({
@@ -64,29 +64,38 @@ const StudentScreen = () => {
           title="Adaptyvi mokykla"
           subtitle="Įveik pradinių klasių aritmetikos kursą"
         />
-        {school.courses.map((course, index) => (
-          <AppButton
-            style={styles.buttonClass}
-            color="secondary"
-            key={index}
-            title={course.getName()}
-            onPress={() => {
-              router.push({
-                pathname: '/course',
-                params: { courseId: course.getId() },
-              });
-            }}></AppButton>
-        ))}
+        <View style={{ flexDirection: 'row' }}>
+          <ClassButton
+            title="Klasė 1"
+            subtitle="4 skyriai, 13 temų"
+            courseId="100"
+          />
+          <ClassButton
+            title="Klasė 2"
+            subtitle="3 skyriai, 16 temų"
+            courseId="200"
+          />
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <ClassButton
+            title="Klasė 3"
+            subtitle="3 skyriai, 22 temos"
+            courseId="300"
+          />
+          <ClassButton
+            title="Klasė 4"
+            subtitle="3 skyriai, 13 temų"
+            courseId="400"
+          />
+        </View>
       </RoundedContainer>
 
       <RoundedContainer tr style={styles.containerLast}>
         <AppButton
-          style={styles.button}
+          style={[styles.button, { paddingHorizontal: 80 }]}
           title="atsijungti"
           icon={icons.logOut}
-          onPress={() => {
-            firebaseClient.signOut();
-          }}
+          onPress={firebaseClient.signOut}
         />
       </RoundedContainer>
       <View // fills remaining part of the screen

@@ -1,11 +1,14 @@
 import { Slot } from 'expo-router';
 
 import { AuthProvider } from '../context/AuthContext';
+import { ProgressProvider } from '../context/ProgressContext';
 
 export default function Root() {
   return (
     <AuthProvider>
-      <Slot />
+      <ProgressProvider>
+        <Slot />
+      </ProgressProvider>
     </AuthProvider>
   );
 }

@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
   containerLast: {
     marginLeft: 0,
     marginRight: 0,
-    paddingBottom: 50,
   },
   image: {
     width: 250,
