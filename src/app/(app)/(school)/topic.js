@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { FlatList, ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 
 import AppButton from '../../../components/AppButton';
@@ -71,19 +71,14 @@ const TopicScreen = () => {
         }
       />
 
-      <RoundedContainer
-        tr
-        br
-        style={{ height: 500, alignItems: 'center', paddingHorizontal: 0 }}>
-        <FlatList
-          style={{}}
-          horizontal
-          keyExtractor={(_item, index) => index.toString()}
-          data={images[topicId] || images['000']}
-          renderItem={({ item }) => (
-            <ImageClicker image={item} style={styles.image} />
-          )}
-        />
+      <RoundedContainer tr br style={{ alignItems: 'center', gap: 10 }}>
+        <AppText style={styles.text}>
+          Čia turėtų būti pateikta mokymosi medžiaga
+        </AppText>
+        <ImageClicker style={{ height: 400 }} images={images['000']} />
+        <AppText style={styles.text}>
+          Čia turėtų būti pateikta mokymosi medžiaga
+        </AppText>
       </RoundedContainer>
 
       <RoundedContainer isPrimary tl style={styles.containerLast}>
@@ -109,10 +104,7 @@ const styles = StyleSheet.create({
   containerLast: {
     marginLeft: 0,
   },
-  image: {
-    height: '100%',
-    marginRight: 10,
-    resizeMode: 'cover', // contain, cover
-    width: 300,
+  text: {
+    ...text.subtitle,
   },
 });

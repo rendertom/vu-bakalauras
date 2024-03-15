@@ -8,7 +8,13 @@ export default {
     poor: require('../../assets/lottie/emoji-cry.json'),
   },
   //
-  '000': [require('../../assets/images/000.jpg')],
+  '000': [
+    require('../../assets/images/000.jpg'),
+    require('../../assets/images/000.jpg'),
+    require('../../assets/images/000.jpg'),
+  ],
+
+  // I have no right to show these images publically
   111: [require('../../assets/images/111.png')],
   112: [require('../../assets/images/112.png')],
   121: [require('../../assets/images/121.png')],
