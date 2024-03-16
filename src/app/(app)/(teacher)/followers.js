@@ -72,7 +72,6 @@ const FollowersTeacher = () => {
   };
 
   const handleAcceptConnection = async (connection) => {
-    console.log(connection);
     setIsLoading(true);
 
     const newConnection = {

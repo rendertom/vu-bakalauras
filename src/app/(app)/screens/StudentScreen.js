@@ -58,7 +58,7 @@ const StudentScreen = () => {
         />
       </RoundedContainer>
 
-      <RoundedContainer isPrimary tl bl style={{ paddingBottom: 20 }}>
+      <RoundedContainer isPrimary tl bl>
         <SectionTitle
           color={colors.GRAY_LIGHT}
           title="Adaptyvi mokykla"

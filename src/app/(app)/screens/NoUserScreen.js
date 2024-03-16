@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
   containerCopyright: {
     flex: 1,
     justifyContent: 'flex-end',
-    paddingBottom: 10,
-    paddingLeft: 10,
+    paddingBottom: 20,
+    paddingLeft: 20,
   },
   containerLast: {
     marginLeft: 0,
