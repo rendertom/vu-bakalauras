@@ -75,7 +75,7 @@ const TopicScreen = () => {
         <AppText style={styles.text}>
           Čia turėtų būti pateikta mokymosi medžiaga
         </AppText>
-        <ImageClicker style={{ height: 400 }} images={images['000']} />
+        <ImageClicker style={{ height: 350 }} images={images['000']} />
         <AppText style={styles.text}>
           Čia turėtų būti pateikta mokymosi medžiaga
         </AppText>
