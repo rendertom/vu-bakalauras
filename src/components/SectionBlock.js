@@ -113,10 +113,14 @@ const SectionBlock = ({ courseId, section, index, isLast }) => {
         someComponent={
           !shouldBeOpen ? (
             <View style={{ flexDirection: 'row' }}>
-              <AppText style={[text.subtitle, { color: color }]}>
+              {/* <AppText style={[text.subtitle, { color: color }]}>
                 {Math.max(0, Math.floor(getExamGrade(sectionId) * 10))}/10
-              </AppText>
-              <StarRating starSize={16} rating={getExamGrade(sectionId) * 5} />
+              </AppText> */}
+              <StarRating
+                alignLeft
+                starSize={16}
+                rating={getExamGrade(sectionId) * 5}
+              />
             </View>
           ) : null
         }

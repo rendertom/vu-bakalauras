@@ -1,6 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import colors from '../config/colors';
+
 const getStars = (rating, maxStars) =>
   [...Array(maxStars)].map((_, i) => {
     if (rating - i >= 1) return 'full';
@@ -21,14 +23,17 @@ const StarRating = ({
   rating,
   maxStars = 5,
   starSize = 32,
-  color = '#FDD835',
+  color = colors.YELLOW,
+  alignLeft,
   style,
   starStyle,
   Component = Icon,
 }) => (
   <View style={[styles.starRating, style]}>
     {getStars(rating, maxStars).map((starType, i) => (
-      <View key={i} style={[styles.star, starStyle]}>
+      <View
+        key={i}
+        style={[alignLeft ? styles.starLeft : styles.starCenter, starStyle]}>
         <Component color={color} size={starSize} type={starType} />
       </View>
     ))}
@@ -41,7 +46,10 @@ const styles = StyleSheet.create({
   starRating: {
     flexDirection: 'row',
   },
-  star: {
+  starCenter: {
     marginHorizontal: 5,
+  },
+  starLeft: {
+    marginRight: 5,
   },
 });

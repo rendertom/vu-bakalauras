@@ -46,14 +46,14 @@ const TopicName = ({ onPress, scoreValue, title, onLight = true }) => {
           </View>
 
           <View style={styles.row}>
-            <AppText
+            {/* <AppText
               style={[
                 text.subtitle,
                 { color: onLight ? colors.GRAY : colors.GRAY_LIGHT },
               ]}>
               {Math.floor(Math.max(0, scoreValue) * 10)}/10
-            </AppText>
-            <StarRating starSize={16} rating={scoreValue * 5} />
+            </AppText> */}
+            <StarRating alignLeft starSize={16} rating={scoreValue * 5} />
           </View>
         </View>
 
