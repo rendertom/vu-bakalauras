@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { useContext, useEffect, useState } from 'react';
+import { Image, ScrollView, StyleSheet } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 
 import AppButton from '../../../components/AppButton';
@@ -10,6 +10,8 @@ import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
 import SafeStatusBar from '../../../components/SafeStatusBar';
 import StarRating from '../../../components/StarRating';
+
+import StorageService from '../../../services/StorageService';
 
 import { ProgressContext } from '../../../context/ProgressContext';
 import { TasksContext } from '../../../context/TasksContext';
@@ -28,6 +30,16 @@ const TopicScreen = () => {
   const { courseId, sectionId, topicId } = useLocalSearchParams();
   const { tasks, setTasks } = useContext(TasksContext);
   const { getTopicGrade } = useContext(ProgressContext);
+
+  const [MOValue, setMOValue] = useState('TEXT');
+
+  useEffect(() => {
+    const init = async () => {
+      const MO = await StorageService.getItem('MO');
+      setMOValue(MO.value);
+    };
+    init();
+  }, []);
 
   const topic = school
     .findCourseById(courseId)
@@ -51,6 +63,11 @@ const TopicScreen = () => {
     });
   };
 
+  const image =
+    MOValue === 'TEXT'
+      ? images['placeholder-text']
+      : images['placeholder-video'];
+
   return (
     <ScrollView style={styles.container}>
       <SafeStatusBar backgroundColor={colors.VIOLET} />
@@ -72,13 +89,7 @@ const TopicScreen = () => {
       />
 
       <RoundedContainer tr br style={{ alignItems: 'center', gap: 10 }}>
-        <AppText style={styles.text}>
-          Čia turėtų būti pateikta mokymosi medžiaga
-        </AppText>
-        <ImageClicker style={{ height: 350 }} images={images['000']} />
-        <AppText style={styles.text}>
-          Čia turėtų būti pateikta mokymosi medžiaga
-        </AppText>
+        <Image source={image} style={styles.image} />
       </RoundedContainer>
 
       <RoundedContainer isPrimary tl style={styles.containerLast}>
@@ -106,5 +117,9 @@ const styles = StyleSheet.create({
   },
   text: {
     ...text.subtitle,
+  },
+  image: {
+    width: 300,
+    height: 400,
   },
 });

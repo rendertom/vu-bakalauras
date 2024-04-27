@@ -12,6 +12,7 @@ import SectionTitle from '../../../components/SectionTitle';
 import ToggleButton from '../../../components/ToggleButton';
 
 import firebaseClient from '../../../api/firebaseClient';
+import StorageService from '../../../services/StorageService';
 
 import colors from '../../../config/colors';
 import icons from '../../../config/icons';
@@ -22,11 +23,13 @@ const MOConfig = [
     title: 'Tekstas',
     subtitle: 'Mokymo medžiaga pateikiama tekstiniu formatu',
     selected: true,
+    value: 'TEXT',
   },
   {
     title: 'Video',
     subtitle: 'Mokymo medžiaga pateikiama video formatu',
     selected: false,
+    value: 'VIDEO',
   },
 ];
 
@@ -109,9 +112,11 @@ const StudentScreen = () => {
     return buttons;
   };
 
-  const startCourse = () => {
+  const startCourse = async () => {
     const topic = topicState.find((i) => i.selected);
     const MO = MOState.find((i) => i.selected);
+
+    await StorageService.setItem('MO', MO);
 
     router.push({
       pathname: '/course',

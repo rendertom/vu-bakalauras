@@ -7,6 +7,8 @@ export default {
     great: require('../../assets/lottie/emoji-glasses.json'),
     poor: require('../../assets/lottie/emoji-cry.json'),
   },
+  'placeholder-text': require('../../assets/images/placeholder-text.png'),
+  'placeholder-video': require('../../assets/images/placeholder-video.png'),
   //
   '000': [
     require('../../assets/images/000.jpg'),
