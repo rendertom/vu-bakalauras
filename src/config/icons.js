@@ -20,6 +20,7 @@ export default {
   list: 'format-list-bulleted',
   logOut: 'power',
   multiplication: 'multiplication-box',
+  pending: 'dots-horizontal-circle-outline',
   reload: 'reload',
   save: 'content-save-outline',
   star: 'star-outline',

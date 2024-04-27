@@ -162,7 +162,7 @@ const SectionBlock = ({ courseId, section, index, isLast }) => {
               <View key={it}>
                 <TopicName
                   title={topic.getName()}
-                  scoreValue={Math.max(0, getTopicGrade(topic.getId()) * 5)}
+                  scoreValue={getTopicGrade(topic.getId())}
                   onLight={!isOdd(index)}
                   onPress={() => {
                     router.push({
