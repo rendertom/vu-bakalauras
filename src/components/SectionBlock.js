@@ -2,11 +2,12 @@ import { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { router } from 'expo-router';
 
+import StorageService from '../services/StorageService.js';
+
 import { ProgressContext } from '../context/ProgressContext.js';
 import { TasksContext } from '../context/TasksContext.js';
 
 import AppButton from '../components/AppButton.js';
-import AppText from './AppText.js';
 import IconButton from '../components/IconButton.js';
 import ListItemSeparator from '../components/ListItemSeparator.js';
 import RoundedContainer from '../components/RoundedContainer.js';
@@ -17,7 +18,6 @@ import TopicName from '../components/TopicName.js';
 import colors from '../config/colors';
 import icons from '../config/icons';
 import tasksConfig from '../config/tasksConfig.js';
-import text from '../config/text.js';
 
 import school from '../data/school.js';
 
@@ -36,6 +36,16 @@ const SectionBlock = ({ courseId, section, index, isLast }) => {
   } = useContext(ProgressContext);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [sequenceValue, setSequenceValue] = useState('GLOBAL');
+
+  useEffect(() => {
+    const init = async () => {
+      const SEQ = await StorageService.getItem('SEQ');
+      setSequenceValue(SEQ.value);
+    };
+    init();
+  }, []);
+
   const shouldBeOpen =
     tookInitialExam(section.getId()) &&
     !userHasMasteredSection(section.getId());
@@ -136,6 +146,18 @@ const SectionBlock = ({ courseId, section, index, isLast }) => {
     );
   };
 
+  const getTopics = () => {
+    const topics = section.getTopics();
+    if (sequenceValue === 'GLOBAL') {
+      return topics;
+    } else {
+      const unfinished = topics.filter(
+        (topic) => getTopicGrade(topic.getId()) < 0.8
+      );
+      return [unfinished[0]];
+    }
+  };
+
   return (
     <View>
       <RoundedContainer
@@ -161,8 +183,8 @@ const SectionBlock = ({ courseId, section, index, isLast }) => {
           !isOdd(index) ? colors.GRAY_LIGHT : colors.VIOLET_DARK
         )}
 
-        {isOpen
-          ? section.topics.map((topic, it) => (
+        {isOpen && getTopics()[0]
+          ? getTopics().map((topic, it) => (
               <View key={it}>
                 <TopicName
                   title={topic.getName()}

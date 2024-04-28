@@ -18,16 +18,31 @@ import colors from '../../../config/colors';
 import icons from '../../../config/icons';
 import text from '../../../config/text';
 
+const sequenceConfig = [
+  {
+    title: 'Globalus',
+    subtitle: 'Pateikiamas visas mokymo kursas',
+    selected: true,
+    value: 'GLOBAL',
+  },
+  {
+    title: 'Nuoseklus',
+    subtitle: 'Mokymo kursas pateikiamas paeiliui',
+    selected: false,
+    value: 'SEQ',
+  },
+];
+
 const MOConfig = [
   {
     title: 'Tekstas',
-    subtitle: 'Mokymo medžiaga pateikiama tekstiniu formatu',
+    subtitle: 'Turinys pateikiamas tekstiniu formatu',
     selected: true,
     value: 'TEXT',
   },
   {
     title: 'Video',
-    subtitle: 'Mokymo medžiaga pateikiama video formatu',
+    subtitle: 'Turinys pateikiamas video formatu',
     selected: false,
     value: 'VIDEO',
   },
@@ -63,6 +78,7 @@ const topics = [
 const StudentScreen = () => {
   const [MOState, setMOState] = useState(MOConfig);
   const [topicState, setTopicState] = useState(topics);
+  const [sequenceState, setSequenceState] = useState(sequenceConfig);
 
   const getToggleButtons = ({
     isPrimary,
@@ -113,14 +129,18 @@ const StudentScreen = () => {
   };
 
   const startCourse = async () => {
-    const topic = topicState.find((i) => i.selected);
-    const MO = MOState.find((i) => i.selected);
-
-    await StorageService.setItem('MO', MO);
+    await StorageService.setItem(
+      'MO',
+      MOState.find((i) => i.selected)
+    );
+    await StorageService.setItem(
+      'SEQ',
+      sequenceState.find((i) => i.selected)
+    );
 
     router.push({
       pathname: '/course',
-      params: { courseId: topic.courseId },
+      params: { courseId: topicState.find((i) => i.selected).courseId },
     });
   };
 
@@ -173,10 +193,22 @@ const StudentScreen = () => {
       </View>
 
       <RoundedContainer isPrimary tl bl>
-        <SectionTitle color={colors.GRAY_LIGHT} title="Mokymosi medžiaga" />
+        <SectionTitle color={colors.GRAY_LIGHT} title="Mokymosi eiliškumas" />
 
         {getToggleButtons({
           isPrimary: true,
+          isRadioButton: true,
+          numItemsPerLine: 2,
+          setState: setSequenceState,
+          state: sequenceState,
+        })}
+      </RoundedContainer>
+
+      <RoundedContainer tr br>
+        <SectionTitle color={colors.GRAY} title="Mokymosi medžiaga" />
+
+        {getToggleButtons({
+          isPrimary: false,
           isRadioButton: true,
           numItemsPerLine: 2,
           setState: setMOState,
@@ -184,7 +216,7 @@ const StudentScreen = () => {
         })}
       </RoundedContainer>
 
-      <RoundedContainer tr br>
+      <RoundedContainer isPrimary tl bl>
         <AppButton
           icon={icons.arrowRight}
           title="Pradėti"
@@ -193,7 +225,7 @@ const StudentScreen = () => {
         />
       </RoundedContainer>
 
-      <RoundedContainer isPrimary tl style={styles.containerLast}>
+      <RoundedContainer tr style={styles.containerLast}>
         <AppButton
           style={styles.button}
           title="aritmetika"
@@ -209,7 +241,7 @@ const StudentScreen = () => {
       <View // fills remaining part of the screen
         style={{
           height: '100%',
-          backgroundColor: colors.VIOLET,
+          backgroundColor: colors.WHITE,
         }}
       />
     </ScrollView>

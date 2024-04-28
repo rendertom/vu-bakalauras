@@ -5,7 +5,6 @@ import { router, useLocalSearchParams } from 'expo-router';
 import AppButton from '../../../components/AppButton';
 import AppText from '../../../components/AppText';
 import IconButton from '../../../components/IconButton';
-import ImageClicker from '../../../components/ImageClicker';
 import RoundedContainer from '../../../components/RoundedContainer';
 import RoundedContainerAnother from '../../../components/RoundedContainerAnother';
 import SafeStatusBar from '../../../components/SafeStatusBar';
