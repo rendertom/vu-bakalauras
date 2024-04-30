@@ -62,10 +62,12 @@ const TopicScreen = () => {
     });
   };
 
-  const image =
-    MOValue === 'TEXT'
-      ? images['placeholder-text']
-      : images['placeholder-video'];
+  let image = images['placeholder-text'];
+  let imageStyle = { width: 300, height: 400 };
+  if (MOValue === 'VIDEO') {
+    image = images['placeholder-video'];
+    imageStyle = { width: 350, height: 262 };
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -88,7 +90,7 @@ const TopicScreen = () => {
       />
 
       <RoundedContainer tr br style={{ alignItems: 'center', gap: 10 }}>
-        <Image source={image} style={styles.image} />
+        <Image source={image} style={imageStyle} />
       </RoundedContainer>
 
       <RoundedContainer isPrimary tl style={styles.containerLast}>
@@ -116,9 +118,5 @@ const styles = StyleSheet.create({
   },
   text: {
     ...text.subtitle,
-  },
-  image: {
-    width: 300,
-    height: 400,
   },
 });
